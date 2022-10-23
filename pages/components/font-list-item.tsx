@@ -2,7 +2,7 @@ import React from 'react';
 
 type FontListItemProps = {
     name: string;
-    children: React.ReactNode;
+    children: React.ReactNode; 
 }
 
 class FontListItem extends React.Component<FontListItemProps> {
@@ -10,7 +10,7 @@ class FontListItem extends React.Component<FontListItemProps> {
     render() {
         return <div>
             <h1>
-                {this.props.name}
+                { this.props.name }
             </h1>
         </div>
     }
