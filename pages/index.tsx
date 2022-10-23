@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Link from "next/link";
-import FontListItem from '../components/font-list-item';
+import FontList from '../components/font-list';
 
 const Home: NextPage = () => {
   return (
@@ -11,9 +11,7 @@ const Home: NextPage = () => {
           About
         </a>
       </Link>
-      <FontListItem name='hello'>
-
-      </FontListItem>
+      <FontList></FontList>
     </div>
 
   )

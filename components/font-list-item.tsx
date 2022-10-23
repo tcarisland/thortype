@@ -1,17 +1,15 @@
 import React from 'react';
+import Image from "next/image";
 
 type FontListItemProps = {
     name: string;
-    children: React.ReactNode; 
 }
 
 class FontListItem extends React.Component<FontListItemProps> {
 
     render() {
         return <div>
-            <h1>
-                { this.props.name }
-            </h1>
+            <Image src={"fonts/" + this.props.name + ".jpg"} width="400px" height="300px"></Image>
         </div>
     }
 }
