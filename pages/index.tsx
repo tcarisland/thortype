@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Link from "next/link";
-import FontListItem from './components/font-list-item';
+import FontListItem from '../components/font-list-item';
+import '../styles/globals.css';
 
 const Home: NextPage = () => {
   return (
