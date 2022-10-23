@@ -9,7 +9,7 @@ export default class FontList extends React.Component {
 
     render() {
         let counter = 0;
-        return <div>
+        return <div className='fontList'>
             { this.items.map(item => ( <FontListItem key={++counter} name={item}></FontListItem>))}
         </div>
     }
