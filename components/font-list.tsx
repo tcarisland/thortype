@@ -9,8 +9,10 @@ export default class FontList extends React.Component {
 
     render() {
         let counter = 0;
-        return <div className='fontList'>
-            { this.items.map(item => ( <FontListItem key={++counter} name={item}></FontListItem>))}
+        return <div className="display: fontListBox">
+            <div className='fontList'>
+                { this.items.map(item => ( <FontListItem key={++counter} name={item}></FontListItem>))}
+            </div>
         </div>
     }
 }
