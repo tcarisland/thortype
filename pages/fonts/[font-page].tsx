@@ -13,14 +13,15 @@ const FontPage: NextPage = () => {
     const font: Font | undefined = FontService.findFont(fontName);
 
     return(
-        <div>
+        <div className="fontPageContainer">
             <Image alt={fontName} src={"../../fonts/" + fontName + ".jpg"} width="600px" height="450px">
             </Image>
-            {
-                font !== undefined &&
-                <div>
-                    { FontService.getFontFilePath(font) }
-                </div>
+            { font !== undefined &&
+                <p>
+                    <a href={ "/static/fonts/" + FontService.getFontFilePath(font)} download>
+                        { FontService.getFontFilePath(font) }
+                    </a>
+                </p>
             }
         </div>
     )

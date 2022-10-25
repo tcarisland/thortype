@@ -15,6 +15,11 @@ a {
   box-sizing: border-box;
 }
 
+.fontPageContainer {
+  display: grid;
+  place-items:  center;
+}
+
 .fontList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
