@@ -14,8 +14,7 @@ const FontPage: NextPage = () => {
     const font: Font | undefined = FontService.findFont(fontName);
     const fontStyle = {
         fontFamily: fontCssName,
-        fontSize: "24pt",
-        textAlign: "center"
+        fontSize: "24pt"
     }
     return(
         <div className="fontPageContainer">
