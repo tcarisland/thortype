@@ -45,5 +45,5 @@ jobs:
           username: ${{ secrets.ftp_username}}
           password: ${{ secrets.ftp_password }}
           server-dir: /home3/thortype/www
-          local-dir: ./out
+          local-dir: /home/runner/work/thortype/thortype/out
 
