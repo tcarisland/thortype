@@ -4,26 +4,43 @@ import Image from 'next/image'
 import { FontStandard } from '../../model/font-standard'
 import FontService from '../../services/font-service'
 import Font from '../../model/font'
+import { GetStaticPaths } from 'next'
+import { GetStaticProps } from 'next'
+
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    return {
+      paths: FontService.fontList.map(fontName => {return { params: {font: fontName}}}),
+      fallback: false, // can also be true or 'blocking'
+    }
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+    return {
+      props: { }, // will be passed to the page component as props
+    }
+  }
+  
 
 const FontPage: NextPage = () => {
     const router = useRouter()
 
-    const fontName = router.asPath.replace(/\/fonts\/(.*?)\//g, "$1");
+    const font = router.asPath.replace(/\/fonts\/(.*?)\//g, "$1");
     const fontCssName = "tc-" + router.asPath.replace(/\/fonts\/(.*?)\//g, "$1");
 
-    const font: Font | undefined = FontService.findFont(fontName);
+    const fontObj: Font | undefined = FontService.findFont(font);
     const fontStyle = {
         fontFamily: fontCssName,
         fontSize: "24pt"
     }
     return(
         <div className="fontPageContainer">
-            <Image alt={fontName} src={"../../fonts/" + fontName + ".jpg"} width="600px" height="450px">
+            <Image alt={font} src={"../../fonts/" + font + ".jpg"} width="600px" height="450px">
             </Image>
-            { font !== undefined &&
+            { fontObj !== undefined &&
                 <p>
-                    <a href={ "/static/fonts/" + FontService.getFontFilePath(font)} download>
-                        Click here to download { font.name }
+                    <a href={ "/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
+                        Click here to download { fontObj.name }
                     </a>
                     <h3>
                         Preview:
