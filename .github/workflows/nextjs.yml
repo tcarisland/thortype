@@ -38,3 +38,11 @@ jobs:
       - name: Build
         id: build
         run: npm install && npm run build && npm run export
+      - name: Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: 50.87.193.240
+          username: ${{ secrets.ftp_username}}
+          password: ${{ secrets.ftp_password }}
+          server-dir: /home3/thortype/www
+
