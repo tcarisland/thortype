@@ -6,8 +6,8 @@ type FontListItemProps = {
     name: string;
 }
 
-const width = "400";
-const height = "300";
+const width = "300";
+const height = "200";
 
 class FontListItem extends React.Component<FontListItemProps> {
 

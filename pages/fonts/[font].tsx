@@ -35,29 +35,33 @@ const FontPage: NextPage = () => {
     }
     return(
         <div className="fontPageContainer">
-            <Image alt={font} src={"../../fonts/" + font + ".jpg"} width="600px" height="450px">
+            <Image className="fontPageImage" alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
             </Image>
-            { fontObj !== undefined &&
-                <p>
-                    <a href={ "/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
-                        Click here to download { fontObj.name }
-                    </a>
-                    <h3>
-                        Preview:
-                    </h3>
-                    <div style={fontStyle}>
-                        <p>
-                            THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
-                        </p>
-                        <p>
-                            the quick brown fox jumps over the lazy dog
-                        </p>
-                        <p>
-                            0123456789
-                        </p>
-                    </div>
-                </p>
+            {
+                fontObj &&
+                <div style={fontStyle}>
+                        THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+                </div>
             }
+            {
+                fontObj &&
+                <div style={fontStyle}>
+                        the quick brown fox jumps over the lazy dog
+                </div>        
+            }
+            {
+                fontObj &&
+                <div style={fontStyle}>
+                    0123456789
+                </div>
+            }
+            {
+                fontObj &&
+                <a href={ "/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
+                    Click here to download { fontObj.name }
+                </a>
+            }
+
         </div>
     )
 }
