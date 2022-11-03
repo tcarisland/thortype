@@ -1,132 +1,165 @@
 @font-face {
+    font-display: block;
     font-family: "tc-16-segment-display";
     src: url("/static/fonts/16-segment-display.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-anderson";
     src: url("/static/fonts/anderson.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-belleview";
     src: url("/static/fonts/belleview.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-betong";
     src: url("/static/fonts/betong.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-borgen";
     src: url("/static/fonts/borgen.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-brush-off";
     src: url("/static/fonts/brush-off.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-buckley-junior";
     src: url("/static/fonts/buckley-junior.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-cardboard-cutout";
     src: url("/static/fonts/cardboard-cutout.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-caroline";
     src: url("/static/fonts/caroline.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-college-sans";
     src: url("/static/fonts/college-sans.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-dm80";
     src: url("/static/fonts/dm80.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-giovanni";
     src: url("/static/fonts/giovanni.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-hairline";
     src: url("/static/fonts/hairline.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-high-society";
     src: url("/static/fonts/high-society.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-hothead";
     src: url("/static/fonts/hothead.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-i8080";
     src: url("/static/fonts/i8080.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-inverted-stencil";
     src: url("/static/fonts/inverted-stencil.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-klub-katz";
     src: url("/static/fonts/klub-katz.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-manos";
     src: url("/static/fonts/manos.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-metal-plate";
     src: url("/static/fonts/metal-plate.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-modum";
     src: url("/static/fonts/modum.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-monomod";
     src: url("/static/fonts/monomod.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-ortho-graphix";
     src: url("/static/fonts/ortho-graphix.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-ragtime";
     src: url("/static/fonts/ragtime.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-roland";
     src: url("/static/fonts/roland.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-salome";
     src: url("/static/fonts/salome.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-snufkin";
     src: url("/static/fonts/snufkin.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-solid-sans";
     src: url("/static/fonts/solid-sans.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-sullivan";
     src: url("/static/fonts/sullivan.ttf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-taylor-gothic";
     src: url("/static/fonts/taylor-gothic.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-taylor";
     src: url("/static/fonts/taylor.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-tuscan-black";
     src: url("/static/fonts/tuscan-black.otf");
  }
  @font-face {
+    font-display: block;
     font-family: "tc-zx80";
     src: url("/static/fonts/zx80.ttf");
  }
