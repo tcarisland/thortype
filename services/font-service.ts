@@ -28,6 +28,7 @@ const fontFileSuffixes: FontFileSuffix[] = [
 ]
 
 const fontList: Font[] = [
+    { "name": "pipeline", "type": FontStandard.OpenType },
     { "name": "16-segment-display", "type": FontStandard.OpenType },
     { "name": "anderson", "type": FontStandard.TrueType },
     { "name": "belleview", "type": FontStandard.OpenType },
