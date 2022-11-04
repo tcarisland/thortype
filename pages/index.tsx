@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 const Home: NextPage = () => {
   return (
     <div>
-      <NavBar></NavBar>
       <FontList></FontList>
     </div>
 
