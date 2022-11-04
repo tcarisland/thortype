@@ -4,6 +4,11 @@
    src: url("/static/fonts/pipeline.otf");
 }
 @font-face {
+   font-display: block;
+   font-family: "tc-tuscan-modular";
+   src: url("/static/fonts/tuscan-modular.otf");
+}
+@font-face {
     font-display: block;
     font-family: "tc-16-segment-display";
     src: url("/static/fonts/16-segment-display.otf");
