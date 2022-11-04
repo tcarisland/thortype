@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  exportTrailingSlash: true,
+  trailingSlash: true,
   reactStrictMode: true,
   swcMinify: true,
   images: {
     loader: 'akamai',
-    path: '',
+    path: '.',
   }
 }
 
