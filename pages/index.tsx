@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
+import Link from "next/link";
 import FontList from '../components/font-list';
-import NavBar from '../components/navbar';
-import 'bootstrap/dist/css/bootstrap.css';
 
 const Home: NextPage = () => {
   return (
