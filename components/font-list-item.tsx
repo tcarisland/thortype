@@ -11,11 +11,19 @@ const height = "200";
 
 class FontListItem extends React.Component<FontListItemProps> {
 
+    ucwords(str: string): string {
+        return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+            function (firstLetter) {
+                return firstLetter.toUpperCase();
+            }).replaceAll("-", " ");
+    }
+
     render() {
         return <div>
-            <Link href={"fonts/" + this.props.name}>
+            <label htmlFor={this.props.name} className='block'>{this.ucwords(this.props.name)}</label>
+            <Link id={this.props.name} href={"fonts/" + this.props.name}>
                 <a>
-                    <Image className='fontListItem' alt={this.props.name} src={"fonts/" + this.props.name + ".jpg"} width={ width } height={ height }>
+                    <Image className='fontListItem' alt={this.props.name} src={"fonts/" + this.props.name + ".jpg"} width={width} height={height}>
                     </Image>
                 </a>
             </Link>

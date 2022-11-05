@@ -35,7 +35,7 @@ const FontPage: NextPage = () => {
     }
     return (
         <div className="fontPageContainer">
-            <Image className="fontPageImage" alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
+            <Image className="fontPageImage" id={fontObj?.name} alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
             </Image>
             {
                 fontObj &&
