@@ -10,17 +10,17 @@ import { GetStaticProps } from 'next'
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
-      paths: FontService.fontList.map(fontName => {return { params: {font: fontName}}}),
-      fallback: false, // can also be true or 'blocking'
+        paths: FontService.fontList.map(fontName => { return { params: { font: fontName } } }),
+        fallback: false, // can also be true or 'blocking'
     }
 }
 
 export const getStaticProps: GetStaticProps = async () => {
     return {
-      props: { }, // will be passed to the page component as props
+        props: {}, // will be passed to the page component as props
     }
-  }
-  
+}
+
 
 const FontPage: NextPage = () => {
     const router = useRouter()
@@ -33,21 +33,21 @@ const FontPage: NextPage = () => {
         fontFamily: fontCssName,
         fontSize: "24pt"
     }
-    return(
+    return (
         <div className="fontPageContainer">
             <Image className="fontPageImage" alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
             </Image>
             {
                 fontObj &&
                 <div style={fontStyle}>
-                        THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+                    THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
                 </div>
             }
             {
                 fontObj &&
                 <div style={fontStyle}>
-                        the quick brown fox jumps over the lazy dog
-                </div>        
+                    the quick brown fox jumps over the lazy dog
+                </div>
             }
             {
                 fontObj &&
@@ -57,9 +57,12 @@ const FontPage: NextPage = () => {
             }
             {
                 fontObj &&
-                <a href={ "/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
-                    Click here to download { fontObj.name }
-                </a>
+                <button className="ml-auto mr-auto w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                    <svg className="fill-current w-4 h-4 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
+                    <a className="text-center" href={"/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
+                        Download
+                    </a>
+                </button>
             }
 
         </div>
