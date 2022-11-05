@@ -75,7 +75,7 @@ export default function Layout() {
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 {
                     pages.map((page, index) => {
-                        return <li className="text-white">
+                        return <li className="text-white" key={index}>
                         <Link href={page.link}>
                           <a>{ page.name }</a>
                         </Link>
