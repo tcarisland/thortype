@@ -16,7 +16,7 @@ const Contact: NextPage = () => {
                     Fill out the form below.
                     </p>
                     <p className="text-gray-600 dark:text-gray-400">
-                    <a href="mailto:thor@thortype.com">If you&apos;re having trouble with the form, you can contact ThorType by sending an email here.</a>  
+                    <a href="mailto:thor@thortype.com" className="no-underline hover:underline ">If you&apos;re having trouble with the form, you can contact ThorType by sending an email to thor@thortype.com</a>  
                     </p>
                 </div>
                 <div className="m-7">
@@ -43,22 +43,15 @@ const Contact: NextPage = () => {
                     </div>
 
                     <div className="flex mb-6 space-x-4">
-                        <div className="w-full md:w-1/2">
-                        <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
-                        <input type="email" name="email" id="email" required className="w-full px-3 py-2 placeholder-gray-300 border-2 border-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" />
-                        <div className="empty-feedback text-red-400 text-sm mt-1">
-                            Please provide your email address.
-                        </div>
-                        <div className="invalid-feedback text-red-400 text-sm mt-1">
-                            Please provide a valid email address.
-                        </div>
-                        </div>
-
-                        <div className="w-full md:w-1/2">
-
-                        <div className="empty-feedback invalid-feedback text-red-400 text-sm mt-1">
-                            Please provide your phone number.
-                        </div>
+                        <div className="w-full">
+                            <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
+                            <input type="email" name="email" id="email" required className="w-full px-3 py-2 placeholder-gray-300 border-2 border-gray-200 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" />
+                            <div className="empty-feedback text-red-400 text-sm mt-1">
+                                Please provide your email address.
+                            </div>
+                            <div className="invalid-feedback text-red-400 text-sm mt-1">
+                                Please provide a valid email address.
+                            </div>
                         </div>
                     </div>
                     <div className="mb-6">
