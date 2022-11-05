@@ -69,6 +69,7 @@ const Contact: NextPage = () => {
                         Please enter your message.
                         </div>
                     </div>
+                    <input type="checkbox" name="botcheck" className="hidden" style={{display: "none"}}></input>
                     <div className="mb-6">
                         <button type="submit" className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">
                         Send Message
