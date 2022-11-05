@@ -13,7 +13,7 @@ const Contact: NextPage = () => {
                 </div>
                 <div className="text-center">
                     <p>Fill out the form below.</p>
-                    <a href="mailto:thor@thortype.com">If you&aposre having trouble with the form, you can contact ThorType by sending an email to thor@thortype.com</a>
+                    <a href="mailto:thor@thortype.com">If you&apos;re having trouble with the form, you can contact ThorType by sending an email to thor@thortype.com</a>
                 </div>
                 <div>
                     <label className="block mb-2 text-sm text-gray-600" htmlFor="fname" >First Name</label>
