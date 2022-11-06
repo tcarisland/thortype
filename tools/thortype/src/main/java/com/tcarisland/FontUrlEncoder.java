@@ -20,7 +20,7 @@ public class FontUrlEncoder {
 		this.path = Paths.get(dir);
 	}
 	
-	public String getBase64String(Path fontPath) {
+	public static String getBase64String(Path fontPath) {
 		try {
 			FileInputStream fis = new FileInputStream(fontPath.toFile());
 			byte font[] = new byte[(int) fontPath.toFile().length()];

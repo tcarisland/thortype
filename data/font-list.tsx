@@ -1,78 +1,78 @@
 import tcpipeline from "./pipeline";
-import tctuscanmodular from "./tuscan-modular";
-import tc16segmentdisplay from "./16-segment-display";
-import tccardboardcutout from "./cardboard-cutout";
-import tcdemodulator from "./demodulator";
-import tcanderson from "./anderson";
-import tcbelleview from "./belleview";
-import tcbetong from "./betong";
-import tcborgen from "./borgen";
-import tcbrushoff from "./brush-off";
-import tcbuckleyjunior from "./buckley-junior";
-import tccaroline from "./caroline";
-import tccollegesans from "./college-sans";
 import tcdm80 from "./dm80";
-import tcgiovanni from "./giovanni";
 import tchairline from "./hairline";
-import tchighsociety from "./high-society";
-import tchothead from "./hothead";
-import tci8080 from "./i8080";
-import tcinvertedstencil from "./inverted-stencil";
-import tcklubkatz from "./klub-katz";
-import tcmanos from "./manos";
+import tcborgen from "./borgen";
+import tctuscanblack from "./tuscan-black";
+import tctuscanmodular from "./tuscan-modular";
+import tccardboardcutout from "./cardboard-cutout";
+import tcragtime from "./ragtime";
+import tcsnufkin from "./snufkin";
+import tcorthographix from "./ortho-graphix";
+import tc16segmentdisplay from "./16-segment-display";
+import tcbuckleyjunior from "./buckley-junior";
+import tctaylor from "./taylor";
 import tcmetalplate from "./metal-plate";
+import tctaylorgothic from "./taylor-gothic";
+import tcbelleview from "./belleview";
+import tcklubkatz from "./klub-katz";
 import tcmodum from "./modum";
 import tcmonomod from "./monomod";
-import tcorthographix from "./ortho-graphix";
-import tcragtime from "./ragtime";
-import tcroland from "./roland";
-import tcsalome from "./salome";
-import tcsnufkin from "./snufkin";
-import tcsolidsans from "./solid-sans";
+import tcbetong from "./betong";
+import tcdemodulator from "./demodulator";
 import tcsullivan from "./sullivan";
-import tctaylorgothic from "./taylor-gothic";
-import tctaylor from "./taylor";
-import tctuscanblack from "./tuscan-black";
+import tcroland from "./roland";
+import tcgiovanni from "./giovanni";
+import tccaroline from "./caroline";
+import tcinvertedstencil from "./inverted-stencil";
+import tci8080 from "./i8080";
+import tchothead from "./hothead";
+import tcanderson from "./anderson";
+import tcbrushoff from "./brush-off";
+import tchighsociety from "./high-society";
+import tcmanos from "./manos";
+import tccollegesans from "./college-sans";
 import tczx80 from "./zx80";
+import tcsolidsans from "./solid-sans";
+import tcsalome from "./salome";
 import Font from "../model/font";
 
 const fonts: Font[] = [
     tcpipeline,
-    tctuscanmodular,
-    tc16segmentdisplay,
-    tccardboardcutout,
-    tcdemodulator,
-    tcanderson,
-    tcbelleview,
-    tcbetong,
-    tcborgen,
-    tcbrushoff,
-    tcbuckleyjunior,
-    tccaroline,
-    tccollegesans,
     tcdm80,
-    tcgiovanni,
     tchairline,
-    tchighsociety,
-    tchothead,
-    tci8080,
-    tcinvertedstencil,
-    tcklubkatz,
-    tcmanos,
+    tcborgen,
+    tctuscanblack,
+    tctuscanmodular,
+    tccardboardcutout,
+    tcragtime,
+    tcsnufkin,
+    tcorthographix,
+    tc16segmentdisplay,
+    tcbuckleyjunior,
+    tctaylor,
     tcmetalplate,
+    tctaylorgothic,
+    tcbelleview,
+    tcklubkatz,
     tcmodum,
     tcmonomod,
-    tcorthographix,
-    tcragtime,
-    tcroland,
-    tcsalome,
-    tcsnufkin,
-    tcsolidsans,
+    tcbetong,
+    tcdemodulator,
     tcsullivan,
-    tctaylorgothic,
-    tctaylor,
-    tctuscanblack,
+    tcroland,
+    tcgiovanni,
+    tccaroline,
+    tcinvertedstencil,
+    tci8080,
+    tchothead,
+    tcanderson,
+    tcbrushoff,
+    tchighsociety,
+    tcmanos,
+    tccollegesans,
     tczx80,
+    tcsolidsans,
+    tcsalome,
 ];
 
 export default fonts;

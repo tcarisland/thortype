@@ -6,14 +6,16 @@ public class App
 {
 	
 	private static final String URL = "../../public/static/fonts";
+	private static final String FONT_OUT = "../../data";
 	
     public static void main( String[] args ) {
-    	FontUrlEncoder fue = new FontUrlEncoder(URL);
-    	
-    	Path path = fue.getOpenTypeFonts().get(0);
-    	System.out.println(path.toAbsolutePath());
-    	System.out.println("\n\n");
-    	System.out.println(fue.getBase64String(path) + "\n");
+    	FontListWriter writer = new FontListWriter(URL, FONT_OUT);
+    	try {
+			writer.run();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }    
     
 }
