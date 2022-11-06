@@ -8,11 +8,9 @@ const Contact: NextPage = () => {
                 <input type="hidden" name="access_key" value="f0915929-7a1a-4b0f-8706-96c9ba786e73" />
                 <input type="hidden" name="subject" value="" />
                 <input type="checkbox" name="botcheck" id="" style={{ display: "none" }} />
+                <h2 className="text-center text-2xl font-extrabold">Contact ThorType</h2>
                 <div className="text-center">
-                    <h2 className="text-2xl font-extrabold">Contact ThorType</h2>
-                </div>
-                <div className="text-center">
-                    <p>Fill out the form below.</p>
+                    Fill out the form below. &nbsp;
                     <a href="mailto:thor@thortype.com">If you&apos;re having trouble with the form, you can contact ThorType by sending an email to thor@thortype.com</a>
                 </div>
                 <div>
@@ -20,12 +18,8 @@ const Contact: NextPage = () => {
                     <input className="w-full px-3 py-2 h-12 rounded-sm placeholder-gray-500 text-gray-900 bg-gray-100 text-sm focus:outline-none" type="text" name="name" id="first_name" required />
                     <label className="block mb-2 text-sm text-gray-600" htmlFor="lname" >Last Name</label>
                     <input className="w-full px-3 py-2 h-12 rounded-sm placeholder-gray-500 text-gray-900 bg-gray-100 text-sm focus:outline-none" type="text" name="last_name" id="lname" required />
-                </div>
-                <div >
                     <label className="block mb-2 text-sm text-gray-600" htmlFor="email" >Email Address</label>
                     <input className="w-full px-3 py-2 rounded-sm placeholder-gray-500 text-gray-900 bg-gray-100 text-sm focus:outline-none" type="email" name="email" id="email" required />
-                </div>
-                <div >
                     <label className="block mb-2 text-sm text-gray-600" htmlFor="message" >Your Message</label>
                     <textarea rows={5} className="w-full px-3 py-2 rounded-sm placeholder-gray-500 text-gray-900 bg-gray-100 text-sm focus:outline-none" name="message" id="message" required></textarea>
                 </div>

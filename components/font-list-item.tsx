@@ -12,10 +12,11 @@ const height = "200";
 class FontListItem extends React.Component<FontListItemProps> {
 
     ucwords(str: string): string {
-        return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+        str = str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
             function (firstLetter) {
                 return firstLetter.toUpperCase();
-            }).replaceAll("-", " ");
+            });
+        return str.replace("-", " ");
     }
 
     render() {

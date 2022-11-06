@@ -5,7 +5,7 @@ import Layout from '../components/layout'
 function MyApp({ Component, pageProps }: AppProps) {
   return <div>
     <Layout></Layout>
-    <Component {...pageProps} />
+    <Component className="min-h-screen" {...pageProps} />
     </div>
 }
 

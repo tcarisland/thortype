@@ -21,7 +21,6 @@ export const getStaticProps: GetStaticProps = async () => {
     }
 }
 
-
 const FontPage: NextPage = () => {
     const router = useRouter()
 
@@ -34,7 +33,8 @@ const FontPage: NextPage = () => {
         fontSize: "24pt"
     }
     return (
-        <div className="fontPageContainer">
+        <div className="grid grid-cols-4 bg-slate-200 pt-4 pb-4 text-center dark:text-slate-900">
+            <div style={{gridColumn: "2 / span 2"}}>
             <Image className="fontPageImage" id={fontObj?.name} alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
             </Image>
             {
@@ -57,14 +57,14 @@ const FontPage: NextPage = () => {
             }
             {
                 fontObj &&
-                <button className="ml-auto mr-auto w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                <button className="ml-auto mr-auto mt-2 w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                     <svg className="fill-current w-4 h-4 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
                     <a className="text-center" href={"/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
                         Download
                     </a>
                 </button>
             }
-
+            </div>
         </div>
     )
 }
