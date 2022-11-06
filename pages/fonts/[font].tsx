@@ -30,7 +30,6 @@ const FontPage: NextPage = () => {
     const fontObj: Font | undefined = FontService.findFont(font);
     const fontStyle = {
         fontFamily: fontCssName,
-        fontSize: "24pt"
     }
     return (
         <div className="grid grid-cols-4 bg-slate-200 pt-4 pb-4 text-center dark:text-slate-900">
@@ -39,27 +38,27 @@ const FontPage: NextPage = () => {
             </Image>
             {
                 fontObj &&
-                <div style={fontStyle}>
+                <div className="text-4xl" style={fontStyle}>
                     THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
                 </div>
             }
             {
                 fontObj &&
-                <div style={fontStyle}>
+                <div className="text-4xl" style={fontStyle}>
                     the quick brown fox jumps over the lazy dog
                 </div>
             }
             {
                 fontObj &&
-                <div style={fontStyle}>
+                <div className="text-4xl" style={fontStyle}>
                     0123456789
                 </div>
             }
             {
                 fontObj &&
-                <button className="ml-auto mr-auto mt-2 w-1/2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                <button className="ml-auto mr-auto mt-2 w-48 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                     <svg className="fill-current w-4 h-4 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
-                    <a className="text-center" href={"/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
+                    <a className="text-center text-xs md:text-lg" href={"/static/fonts/" + FontService.getFontFilePath(fontObj)} download>
                         Download
                     </a>
                 </button>

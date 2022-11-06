@@ -36,7 +36,7 @@ const About: NextPage = () => {
                         </p>
                     </div>
                     <div style={{gridColumn: "7 / span 2"}}>
-                    <Image src={"../images/prof-500x500.jpeg"} width={500} height={500}></Image>
+                    <Image src={"../images/prof-500x500.jpeg"} alt="profile" width={500} height={500}></Image>
                     </div>
                 </div>
             </div>
