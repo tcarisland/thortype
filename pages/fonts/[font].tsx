@@ -6,6 +6,9 @@ import FontService from '../../services/font-service'
 import Font from '../../model/font'
 import { GetStaticPaths } from 'next'
 import { GetStaticProps } from 'next'
+import FontList from '../../components/font-list'
+import dynamic from 'next/dynamic'
+import Script from 'next/script'
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -33,6 +36,18 @@ const FontPage: NextPage = () => {
     }
     return (
         <div className="grid grid-cols-4 bg-slate-200 pt-4 pb-4 text-center dark:text-slate-900">
+            {
+                fontObj &&
+                <style jsx>{`
+                @font-face {
+                    font-display: block;
+                    font-family: "tc-${fontObj.name}";
+                    src: url("${fontObj.encoding}");
+                }
+                `}
+                </style>
+            }
+
             <div style={{gridColumn: "2 / span 2"}}>
             <Image className="fontPageImage" id={fontObj?.name} alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
             </Image>
