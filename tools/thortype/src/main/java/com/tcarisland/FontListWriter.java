@@ -9,12 +9,10 @@ public class FontListWriter {
 
 	private String dir;
 	private String fontTsxDir;
-	private String fontCssDir;
     
-    public FontListWriter(String dir, String fontTsxDir, String fontCssDir) {
+    public FontListWriter(String dir, String fontTsxDir) {
     	this.dir = dir;
     	this.fontTsxDir = fontTsxDir;
-    	this.fontCssDir = fontCssDir;
     }
 
     public List<Font> loadFontsFromDirectory(String dir) {
@@ -49,16 +47,7 @@ public class FontListWriter {
             }
             String fontName = "tc" + font.name.replaceAll("-", "");
             File file = new File(String.format("%s/%s.tsx", fontTsxDir, font.name));
-            File cssFile = new File(String.format("%s/%s.css", fontCssDir, font.name));
             PrintWriter out = new PrintWriter(file);
-            PrintWriter cssOut = new PrintWriter(cssFile);
-            cssOut.println("@font-face {");
-            cssOut.println("font-display: block;");
-            cssOut.printf("font-family: \"tc-%s\";%n", font.name);
-            cssOut.printf("src: %s;%n", base64);
-            cssOut.println("}");
-            cssOut.close();
-
             out.println("import Font from \"../model/font\";");
             out.println("import { FontStandard } from \"../model/font-standard\";");
             out.println("");
@@ -69,7 +58,6 @@ public class FontListWriter {
             out.println("}");
             out.printf("export default %s;%n", fontName);
             out.close();
-            cssOut.close();
 
             flout.printf("import %s from \"./%s\";%n", fontName, font.name);
         }
