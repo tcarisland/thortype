@@ -3,18 +3,18 @@ import { useState } from 'react';
 import NavLink from '../model/nav-link';
 
 const pages: NavLink[] = [
-    {
-        name: "Home", 
-        link: "/"
-    },
-    {
-        name: "About",
-        link: "/about"
-    },
-    {
-        name: "Contact",
-        link: "/contact"
-    }
+  {
+    name: "Home",
+    link: "/"
+  },
+  {
+    name: "About",
+    link: "/about"
+  },
+  {
+    name: "Contact",
+    link: "/contact"
+  }
 ]
 
 export default function Layout() {
@@ -25,9 +25,9 @@ export default function Layout() {
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-              <a href="#">
+              <Link href={"/"}>
                 <h2 className="text-2xl text-white font-bold">ThorType</h2>
-              </a>
+              </Link>
               <div className="md:hidden">
                 <button
                   className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
@@ -68,19 +68,18 @@ export default function Layout() {
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                navbar ? 'block' : 'hidden'
-              }`}
+              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? 'block' : 'hidden'
+                }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 {
-                    pages.map((page, index) => {
-                        return <li className="text-white" key={index}>
-                        <Link href={page.link}>
-                          <a>{ page.name }</a>
-                        </Link>
-                      </li>
-                    })
+                  pages.map((page, index) => {
+                    return <li className="text-white" key={index}>
+                      <Link href={page.link}>
+                        <a>{page.name}</a>
+                      </Link>
+                    </li>
+                  })
                 }
               </ul>
             </div>
