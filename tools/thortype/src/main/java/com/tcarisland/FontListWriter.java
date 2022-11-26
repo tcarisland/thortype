@@ -9,11 +9,22 @@ public class FontListWriter {
 
 	private String dir;
 	private String fontTsxDir;
-    
+
     public FontListWriter(String dir, String fontTsxDir) {
     	this.dir = dir;
     	this.fontTsxDir = fontTsxDir;
     }
+
+    public String getDir() {
+		return dir;
+	}
+
+	public void setDir(String dir) {
+		this.dir = dir;
+	}
+	
+	public FontListWriter() {
+	}
 
     public List<Font> loadFontsFromDirectory(String dir) {
     	FontUrlEncoder fue = new FontUrlEncoder(dir);

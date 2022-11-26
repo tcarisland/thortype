@@ -1,15 +1,12 @@
 package com.tcarisland;
 
-import java.nio.file.Path;
+import com.tcarisland.data.Constants;
 
 public class App 
 {
 	
-	private static final String URL = "../../public/static/fonts";
-	private static final String FONT_OUT = "../../data";
-	
-    public static void main( String[] args ) {
-    	FontListWriter writer = new FontListWriter(URL, FONT_OUT);
+	public static void main( String[] args ) {
+    	FontListWriter writer = new FontListWriter(Constants.FONT_DIR_URL, Constants.FONT_LIST_OUT);
     	try {
 			writer.run();
 		} catch (Exception e) {
