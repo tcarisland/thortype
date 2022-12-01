@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.thortype.tools.model.Font;
+import com.thortype.tools.model.TcFont;
 import com.thortype.tools.typescript.FontTsxField;
 
 @Component
@@ -29,7 +29,7 @@ public class FontDefinitionTypescriptRenderer extends TypescriptRenderer<Map<Str
 	
 	public Map<String, String> getFieldMap() {
 		return Arrays
-			.stream(Font.class.getDeclaredFields())
+			.stream(TcFont.class.getDeclaredFields())
 			.filter(field -> field.isAnnotationPresent(FontTsxField.class))
 			.map(field -> {
 				field.setAccessible(true);

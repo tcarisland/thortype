@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="084ea444-911c-4e79-b5a3-d39dd99dd32a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/data/font-list-data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/data/font-list-data.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/font.ts" beforeDir="false" afterPath="$PROJECT_DIR$/data/font.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/klub-katz.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/ToolsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/ToolsApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/json/FontDefinitionTypescriptRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/json/FontDefinitionTypescriptRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/json/FontTypescriptRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/json/FontTypescriptRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/model/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/model/TcFont.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/services/FontWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/services/FontWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/utils/DirectoryHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/src/main/java/com/thortype/tools/utils/DirectoryHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/tools/src/test/java/com/thortype/tools/typescript/RendererTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tools/tools/src/test/java/com/thortype/tools/typescript/RendererTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IIWPwfIdRlGGpWxe3AZYndnfFv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/thorchristopher/git/thortype",
+    "settings.editor.selected.configurable": "configurable.group.build"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="084ea444-911c-4e79-b5a3-d39dd99dd32a" name="Changes" comment="" />
+      <created>1669869560291</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669869560291</updated>
+    </task>
+    <servers />
+  </component>
+</project>

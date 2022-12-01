@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.thortype.tools.json.FontDefinitionTypescriptRenderer;
 import com.thortype.tools.json.FontStandardTypescriptRenderer;
 import com.thortype.tools.json.FontTypescriptRenderer;
-import com.thortype.tools.model.Font;
+import com.thortype.tools.model.TcFont;
 import com.thortype.tools.utils.Base64FontReader;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,13 +44,13 @@ public class FontWriter {
 		}
 	}
 
-	public void printFont(File outDirPath, List<Font> fontList) {
+	public void printFont(File outDirPath, List<TcFont> fontList) {
 		if (!outDirPath.exists() && outDirPath.getParentFile().exists()) {
 			outDirPath.mkdir();
 		}
 		try {
 			initPrint(outDirPath);
-			for(Font font : fontList) {
+			for(TcFont font : fontList) {
 				font.setEncoding(font.formatBase64(fontReader.getBase64String(font.getPath())));
 				printFont(font);
 			}
@@ -63,22 +63,22 @@ public class FontWriter {
 
 	public void initPrint(File outDirPath) throws IOException {
 		File file = new File(outDirPath.getPath() + "/font-list-data.ts");
-		this.printWriter = new PrintWriter(file);
+		printWriter = new PrintWriter(file);
 		printWriter.println("import Font, { FontStandard } from \"./font\";\n");
 		log.info("init file {}", outDirPath.getAbsolutePath());
 		printWriter.println("const fonts: Font[] = [");
 	}
 	
-	public void printFont(Font font) throws IOException {
+	public void printFont(TcFont font) throws IOException {
 		log.info("printing font {}", font.getName());
-		this.printWriter.printf("%s,%n", this.fontRenderer.render(font));
+		printWriter.printf("%s,%n", this.fontRenderer.render(font));
 	}
 	
 	public void closePrint() throws IOException {
 		log.info("closing writer");		
-		this.printWriter.println("];");
-		this.printWriter.println("export default fonts;");
-		this.printWriter.close();
+		printWriter.println("];");
+		printWriter.println("export default fonts;");
+		printWriter.close();
 	}
 
 }

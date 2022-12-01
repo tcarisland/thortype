@@ -1,6 +1,7 @@
 package com.thortype.tools;
 
 import java.io.File;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.thortype.tools.model.Font;
+import com.thortype.tools.model.TcFont;
 import com.thortype.tools.services.FontWriter;
 import com.thortype.tools.utils.DirectoryHelper;
 
@@ -33,7 +34,7 @@ public class ToolsApplication {
 	
 	@PostConstruct
 	public void onInit() {
-		List<Font> fonts = directoryHelper.listFontDir(toolsProperties.getFontDir());
+		List<TcFont> fonts = directoryHelper.listFontDir(toolsProperties.getFontDir());
 		File outputDir = new File(toolsProperties.getOutDir());
 		fontWriter.printFont(outputDir, fonts);
 		fontWriter.printFontDefinition(outputDir);
