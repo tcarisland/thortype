@@ -1,14 +1,13 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { FontStandard } from '../../model/font-standard'
 import FontService from '../../services/font-service'
-import Font from '../../model/font'
 import { GetStaticPaths } from 'next'
 import { GetStaticProps } from 'next'
 import FontList from '../../components/font-list'
 import dynamic from 'next/dynamic'
 import Script from 'next/script'
+import Font from '../../data/font'
 
 
 export const getStaticPaths: GetStaticPaths = async () => {

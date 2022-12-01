@@ -1,4 +1,4 @@
-import { FontStandard } from "./font-standard"
+import { FontStandard } from "../data/font";
 
 export default interface FontFileSuffix {
     type: FontStandard,
