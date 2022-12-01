@@ -4,10 +4,7 @@ import Image from 'next/image'
 import FontService from '../../services/font-service'
 import { GetStaticPaths } from 'next'
 import { GetStaticProps } from 'next'
-import FontList from '../../components/font-list'
-import dynamic from 'next/dynamic'
-import Script from 'next/script'
-import Font from '../../data/font'
+import { Font } from '../../data/font'
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
