@@ -1,6 +1,6 @@
 import FontFileSuffix from "../model/font-file-suffix";
 import fonts from '../data/font-list-data';
-import Font, { FontStandard } from "../data/font";
+import { Font, FontStandard } from "../data/font";
 
 export default class FontService {
 

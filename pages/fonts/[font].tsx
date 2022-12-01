@@ -45,8 +45,16 @@ const FontPage: NextPage = () => {
             }
 
             <div style={{gridColumn: "2 / span 2"}}>
-            <Image className="fontPageImage" id={fontObj?.name} alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
-            </Image>
+                <div>
+                    <Image className="fontPageImage" id={fontObj?.name} alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
+                    </Image>
+                    {
+                        fontObj && 
+                        <div>
+                            { fontObj.meta.description }
+                        </div>
+                    }
+                </div>
             {
                 fontObj &&
                 <div className="text-4xl" style={fontStyle}>
