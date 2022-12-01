@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.thortype.tools.model.TcFont;
+import com.thortype.tools.model.Font;
 import com.thortype.tools.services.FontWriter;
 import com.thortype.tools.utils.DirectoryHelper;
 
@@ -31,13 +31,18 @@ public class ToolsApplication {
 	private ToolsProperties toolsProperties;
 	@Autowired
 	private FontWriter fontWriter;
-	
+
 	@PostConstruct
 	public void onInit() {
-		List<TcFont> fonts = directoryHelper.listFontDir(toolsProperties.getFontDir());
-		File outputDir = new File(toolsProperties.getOutDir());
-		fontWriter.printFont(outputDir, fonts);
-		fontWriter.printFontDefinition(outputDir);
+    if(System.getProperty("productionRun") != null) {
+      log.info("found productionRun argument, printing files");
+      List<Font> fonts = directoryHelper.listFontDir(toolsProperties.getFontDir());
+      File outputDir = new File(toolsProperties.getOutDir());
+      fontWriter.printFont(outputDir, fonts);
+      fontWriter.printFontDefinition(outputDir);
+    } else {
+      log.info("not a production run");
+    }
 	}
-	
+
 }

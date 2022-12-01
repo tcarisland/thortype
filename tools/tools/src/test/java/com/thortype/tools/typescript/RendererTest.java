@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 
-import com.thortype.tools.OpenTypeDataExtractor;
+import com.thortype.tools.opentype.OpenTypeMetaExtractor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.thortype.tools.json.FontDefinitionTypescriptRenderer;
 import com.thortype.tools.json.FontStandardTypescriptRenderer;
 import com.thortype.tools.json.FontTypescriptRenderer;
-import com.thortype.tools.model.TcFont;
+import com.thortype.tools.model.Font;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,11 +27,11 @@ class RendererTest {
 	@Autowired
 	private FontTypescriptRenderer fontRenderer;
   @Autowired
-  private OpenTypeDataExtractor openTypeDataExtractor;
+  private OpenTypeMetaExtractor openTypeDataExtractor;
 
 	@Test
 	void printDefinitions() throws SecurityException, ClassNotFoundException {
-		TcFont font = TcFont.parse(new File("./tuscan-modular.ttf").toPath(), openTypeDataExtractor);
+		Font font = Font.parse(new File("./tuscan-modular.ttf").toPath(), openTypeDataExtractor);
 		assertEquals(font.getName(), "tuscan-modular");
 		log.info("\n{}", definitionRenderer.render());
 		log.info("\n{}", standardRenderer.render());
@@ -39,7 +39,7 @@ class RendererTest {
 
 	@Test
 	void printFont() {
-		TcFont font = TcFont.parse(new File("./tuscan-modular.ttf").toPath(), openTypeDataExtractor);
+		Font font = Font.parse(new File("./tuscan-modular.ttf").toPath(), openTypeDataExtractor);
 		font.setEncoding("encoding goes here");
 		log.info("\n{}", fontRenderer.render(font));
 	}

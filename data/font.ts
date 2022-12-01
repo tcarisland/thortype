@@ -2,9 +2,15 @@ export enum FontStandard {
   OpenType,
   TrueType
 }
-export default interface Font {
+export interface Font {
+  meta: Meta,
   name: string,
-  description: string,
   type: FontStandard,
   encoding: string
+}
+export interface Meta {
+  designerUrl: string,
+  licenseUrl: string,
+  manufacturerUrl: string,
+  description: string
 }
