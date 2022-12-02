@@ -4,10 +4,10 @@ import FontService from '../services/font-service';
 
 const About: NextPage = () => {
     return(
-        <div className='grid grid-cols-8 min-h-screen'>
-            <div style={{gridColumn: "2 / span 6"}} className="h-full">
-                <div className='dark:text-slate-900 dark:bg-slate-300 p-4 grid grid-cols-8'>
-                    <div style={{gridColumn: "1 / span 6"}}>
+        <div className='grid grid-cols-6 min-h-screen dark:text-slate-900 dark:bg-slate-200'>
+            <div style={{gridColumn: "1 / span 6"}} className="h-full">
+                <div className='p-4 grid grid-cols-8'>
+                    <div style={{gridColumn: "1 / span 7"}}>
                         <h2 className='text-xl'>
                             Hi, and welcome to ThorType.
                         </h2>
@@ -35,7 +35,7 @@ const About: NextPage = () => {
                             If you feel like supporting my work, you can send tips using various cryptocurrencies to thortype.eth (eth, matic) and thortype.nft (eth, matic, btc, sol, ltc, zil, trx, vet and ada). Please note that to buy a commercial licence for any of my fonts, Creative Fabrica is the place to go.
                         </p>
                     </div>
-                    <div style={{gridColumn: "7 / span 2"}}>
+                    <div style={{gridColumn: "8 / span 1"}}>
                     <Image src={"../images/prof-500x500.jpeg"} alt="profile" width={500} height={500}></Image>
                     </div>
                 </div>
