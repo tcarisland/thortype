@@ -5,7 +5,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: theme => ({
+        "screen-85": "calc(100vh * 0.85)",
+      }),
+    },
   },
+  variants: { display: ["responsive", "hover", "focus"] },
   plugins: [],
 }

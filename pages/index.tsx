@@ -1,14 +1,13 @@
 import type { NextPage } from 'next';
-import FontList from '../components/font-list';
 import Head from 'next/head';
+import FontList from '../components/font-list';
+import ThorTypeMeta from '../components/thor-type-meta';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div>    
       <Head>
-        <title>
-          ThorType
-        </title>
+        <ThorTypeMeta></ThorTypeMeta>
       </Head>
       <FontList></FontList>
     </div>
