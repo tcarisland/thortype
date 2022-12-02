@@ -12,5 +12,6 @@ export interface Meta {
   designerUrl: string,
   licenseUrl: string,
   manufacturerUrl: string,
-  description: string
+  description: string,
+  sampleText: string
 }

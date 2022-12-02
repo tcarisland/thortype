@@ -46,7 +46,8 @@ public class OpenTypeMetaExtractor {
         OpenTypeNameTableName.MANUFACTURER_URL,
         OpenTypeNameTableName.DESCRIPTION,
         OpenTypeNameTableName.DESIGNER_URL,
-        OpenTypeNameTableName.LICENSE_URL
+        OpenTypeNameTableName.LICENSE_URL,
+        OpenTypeNameTableName.SAMPLE_TEXT
       );
     } catch (Exception e) {
       log.error(e.getMessage(), e);

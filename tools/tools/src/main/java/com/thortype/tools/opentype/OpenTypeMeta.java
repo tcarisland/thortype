@@ -23,6 +23,9 @@ public class OpenTypeMeta {
     @FontTsxField
     @OpenTypeMetaField(OpenTypeNameTableName.MANUFACTURER_URL)
     private String manufacturerUrl = "";
+    @FontTsxField
+    @OpenTypeMetaField(OpenTypeNameTableName.SAMPLE_TEXT)
+    private String sampleText = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
 
     public void set(String data, OpenTypeNameTableName index) {
         for(Field f : OpenTypeMeta.class.getDeclaredFields()) {

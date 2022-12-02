@@ -51,26 +51,26 @@ const FontPage: NextPage = () => {
                     {
                         fontObj && 
                         <div>
-                            { fontObj.meta.description }
+                            <p>
+                                { fontObj.meta.description }
+                            </p>
+                            <p>
+                                This font is free for personal use.
+                            </p>
+                            <p>
+                                For commercial use, please purchase a license 
+                                { fontObj.meta.licenseUrl  &&
+                                 <a href={fontObj.meta.licenseUrl}> here</a> ||
+                                 <a href={ "https://www.creativefabrica.com/product/" + fontObj.name + "/ref/38065"}> here</a>
+                                }
+                            </p>
                         </div>
                     }
                 </div>
             {
                 fontObj &&
                 <div className="text-4xl" style={fontStyle}>
-                    THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
-                </div>
-            }
-            {
-                fontObj &&
-                <div className="text-4xl" style={fontStyle}>
-                    the quick brown fox jumps over the lazy dog
-                </div>
-            }
-            {
-                fontObj &&
-                <div className="text-4xl" style={fontStyle}>
-                    0123456789
+                    { fontObj.meta.sampleText }
                 </div>
             }
             {
