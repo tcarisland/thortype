@@ -25,7 +25,7 @@ class OpenTypeDataExtractorTest {
 	@Test
 	public void findFile() {
 		log.info("{}", props.getFontDir());
-    findFile("pipeline.otf", "klub-katz.otf");
+    findFile("pipeline.otf", "klub-katz.otf");c
 	}
 
   public void findFile(String ...filename) {
