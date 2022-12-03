@@ -2,16 +2,9 @@ import React from 'react';
 import { Font } from '../data/font';
 import { GetStaticProps } from 'next';
 import { Box, Modal, Tooltip, Typography } from '@mui/material';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import DownloadIcon from '@mui/icons-material/Download';
 import domtoimage from 'dom-to-image';
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import TextDecreaseIcon from '@mui/icons-material/TextDecrease';
-import TextIncreaseIcon from '@mui/icons-material/TextIncrease';
-import { fontFamily } from '@mui/system';
+import TextPreviewToolbar, { TextPreviewToolbarAction } from './text-preview-toolbar';
 
 export interface TextPreviewProps {
     fontFilePath: string,
@@ -27,12 +20,6 @@ export interface TextPreviewState {
     lineHeight: number
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-    return {
-        props: {}, // will be passed to the page component as props
-    }
-}
-
 export enum TextPreviewAlign {
     LEFT,
     CENTER,
@@ -40,12 +27,13 @@ export enum TextPreviewAlign {
 }
 
 export default class TextPreview extends React.Component<TextPreviewProps, TextPreviewState> {
+    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
+
     fontCssName = "tc-" + this.props.fontName.replace(/\/fonts\/(.*?)\//g, "$1");
     fontStyle = {
         fontFamily: this.fontCssName,
     }
     textAreaStyle = "w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 ";
-    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
     
     constructor(props: TextPreviewProps) {
         super(props);
@@ -59,6 +47,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
     }
 
     componentDidMount(): void {
+        if(!document) {
+            return;
+        }
         const sampleTextArea = document.getElementById("fontDemoTextArea");
         sampleTextArea && (sampleTextArea.innerHTML = this.props.font.meta.sampleText);
     }
@@ -83,6 +74,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
     }
 
     createSnapshot() {
+        if(!document) {
+            return;
+        }
         let fontTextarea: HTMLElement = document.getElementById("fontDemoTextArea") as HTMLElement;
         const comp = this;
         const scale = 10;
@@ -151,6 +145,31 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         });
     }
 
+    onToolButtonClicked(action: TextPreviewToolbarAction) {
+        switch(action) {
+            case TextPreviewToolbarAction.SNAPSHOT:
+                this.createSnapshot();
+                break;
+            case TextPreviewToolbarAction.ALIGN_LEFT:
+                this.updateAlignment(TextPreviewAlign.LEFT);
+                break;
+            case TextPreviewToolbarAction.ALIGN_CENTER:
+                this.updateAlignment(TextPreviewAlign.CENTER);
+                break;
+            case TextPreviewToolbarAction.ALIGN_RIGHT:
+                this.updateAlignment(TextPreviewAlign.RIGHT);
+                break;
+            case TextPreviewToolbarAction.INCREASE_FONT_SIZE:
+                this.increaseFontSize(2);
+                break;
+            case TextPreviewToolbarAction.DECREASE_FONT_SIZE:
+                this.increaseFontSize(-2);
+                break;
+            case TextPreviewToolbarAction.CAPTION:
+                console.log("caption");
+                break;
+        }
+    }
     render(): React.ReactNode {
         return(
             <div>
@@ -161,51 +180,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                     </div>
                 </Tooltip>
             <div>
-                <div className='flex justify-start gap-2'>
-                        <Tooltip title="Download" placement='top'>
-                            <button className={ this.buttonStyle }>
-                                <a href={this.props.fontFilePath} download>
-                                <DownloadIcon></DownloadIcon>
-                                </a>
-                            </button>
-                        </Tooltip>
-                        <Tooltip title='Take Snapshot' placement='top'>
-                            <button className={ this.buttonStyle } onClick={() => { this.createSnapshot() }}>
-                                <CameraAltIcon></CameraAltIcon>
-                            </button>
-                        </Tooltip>
-                        <Tooltip title="Align Left" placement='top'>
-                            <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.LEFT)}} >
-                                <FormatAlignLeftIcon></FormatAlignLeftIcon>
-                            </button>
-                        </Tooltip>
-                        <Tooltip title="Align Center" placement='top'>
-                            <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.CENTER)}}>
-                                <FormatAlignCenterIcon></FormatAlignCenterIcon>
-                            </button>
-                        </Tooltip>
-                        <Tooltip title="Align Right" placement='top'>
-                            <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.RIGHT)}}>
-                                <FormatAlignRightIcon></FormatAlignRightIcon>
-                            </button>
-                        </Tooltip>
-                        <Tooltip title="Increase Font Size" placement='top'>
-                            <button className={ this.buttonStyle } onClick={() => {this.increaseFontSize(4)
-                            }}>
-                                <TextIncreaseIcon></TextIncreaseIcon>
-                            </button>
-                        </Tooltip>
-                        <Tooltip title="Decrease Font Size" placement='top'>
-                            <button className={ this.buttonStyle } onClick={() => {this.increaseFontSize(-4)}}>
-                                <TextDecreaseIcon></TextDecreaseIcon>
-                            </button>
-                        </Tooltip>
-                        <Tooltip title="Caption Image" placement='top'>
-                            <button className={ this.buttonStyle } onClick={() => { this.uploadImage()}}>
-                                <AddPhotoAlternateIcon></AddPhotoAlternateIcon>
-                            </button>
-                        </Tooltip>
-                    </div>
+                <TextPreviewToolbar fontFilePath={(this.props.fontFilePath)} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
                 </div>
                 <Modal
                     open={this.state.open}
@@ -220,7 +195,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         <img id="snapshotImage" src={this.state.base64Snapshot}></img>
                         <Tooltip title="Download" placement='top'>
                             <button className={ this.buttonStyle + "mt-2"}>
-                                <a download={ this.props.fontName + "-snapshot.png"} href={this.state.base64Snapshot}>
+                                <a download={ this.props.fontName + "-snapshot.png"} href={ this.state.base64Snapshot }>
                                     <DownloadIcon>
                                     </DownloadIcon>
                                 </a>
