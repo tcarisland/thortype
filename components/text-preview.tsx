@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next';
 import { Box, Modal, Tooltip, Typography } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import DownloadIcon from '@mui/icons-material/Download';
+import domtoimage from 'dom-to-image';
 
 
 export interface TextPreviewProps {
@@ -39,11 +40,23 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         fontFamily: this.fontCssName,
     }
 
-    createSnapshot() {
+    updateSnapshot(snapshot: string) {
         this.setState({
-            ...this.state,
-            open: true
-        })
+            open: true,
+            base64Snapshot: snapshot
+        }); 
+    }
+
+    createSnapshot() {
+        let fontTextarea: HTMLElement = document.getElementById("fontDemoTextArea") as HTMLElement;
+        const comp = this;
+        domtoimage.toPng(fontTextarea)
+            .then(function (dataUrl: string) {
+                comp.updateSnapshot(dataUrl);    
+            })
+            .catch(function (error: any) {
+                console.error('oops, something went wrong!', error);
+            });
     }
 
     style = {
@@ -51,20 +64,27 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: 900,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
         color: "black",
         p: 4,
-      };
+    };
+
+    handleClose() {
+        this.setState({
+            ...this.state,
+            open: false
+        })
+    }
 
     render(): React.ReactNode {
         return(
             <div>
                 <Tooltip title="Try the font with your own text" placement='top'>
                     <div>
-                        <textarea className="text-4xl w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70" defaultValue={this.props.font?.meta.sampleText} style={this.fontStyle}></textarea>
+                        <textarea id="fontDemoTextArea" className="text-4xl w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70" defaultValue={this.props.font?.meta.sampleText} style={this.fontStyle}></textarea>
                     </div>
                 </Tooltip>
             <div>
@@ -86,7 +106,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                 </div>
                 <Modal
                     open={this.state.open}
-                    onClose={() => { this.setState({ open: false }) }}
+                    onClose={() => { this.handleClose() }}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                     >
@@ -94,9 +114,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             { this.props.fontName } snapshot
                         </Typography>
-                        <img src={this.state.base64Snapshot}>
-
-                        </img>
+                        <img id="snapshotImage" src={this.state.base64Snapshot}></img>
                     </Box>
                 </Modal>
             </div>
