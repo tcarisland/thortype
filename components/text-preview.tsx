@@ -9,6 +9,7 @@ import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
 import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { fontFamily } from '@mui/system';
 
 export interface TextPreviewProps {
     fontFilePath: string,
@@ -37,7 +38,7 @@ export enum TextPreviewAlign {
 export default class TextPreview extends React.Component<TextPreviewProps, TextPreviewState> {
     fontCssName = "tc-" + this.props.fontName.replace(/\/fonts\/(.*?)\//g, "$1");
     fontStyle = {
-        fontFamily: this.fontCssName
+        fontFamily: this.fontCssName,
     }
     textAreaStyle = "text-4xl w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 ";
     buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
@@ -48,7 +49,12 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             open: false,
             base64Snapshot: "",
             textAreaAlignment: ""
-        };
+        };        
+    }
+
+    componentDidMount(): void {
+        const sampleTextArea = document.getElementById("fontDemoTextArea");
+        sampleTextArea && (sampleTextArea.innerHTML = this.props.font.meta.sampleText);
     }
 
     updateSnapshot(snapshot: string) {
@@ -131,7 +137,8 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             <div>
                 <Tooltip title="Try the font with your own text" placement='top'>
                     <div>
-                        <textarea id="fontDemoTextArea" className={ this.textAreaStyle + " " + this.state.textAreaAlignment } defaultValue={this.props.font?.meta.sampleText} style={this.fontStyle}></textarea>
+                        <div id="fontDemoTextArea" contentEditable="true" className={ this.textAreaStyle + " " + this.state.textAreaAlignment } style={{fontFamily: this.fontCssName}}>
+                        </div>
                     </div>
                 </Tooltip>
             <div>

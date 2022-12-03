@@ -67,8 +67,8 @@ const FontPage: NextPage = () => {
                         <p>
                             For commercial use, please purchase a license 
                             { fontObj.meta.licenseUrl  &&
-                                <a className='font-bold' href={fontObj.meta.licenseUrl}> here</a> ||
-                                <a className='font-bold' href={ "https://www.creativefabrica.com/designer/thorchristopherarisland/ref/38065"}> here</a>
+                                <a className='font-bold' href={ fontObj.meta.licenseUrl }> here</a> ||
+                                <a className='font-bold' href={ "https://www.creativefabrica.com/designer/thorchristopherarisland/ref/38065" }> here</a>
                             }
                         </p>
                     </div>
