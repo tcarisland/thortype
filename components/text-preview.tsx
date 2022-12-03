@@ -90,7 +90,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         }
         let fontTextarea: HTMLElement = document.getElementById("fontDemoTextArea") as HTMLElement;
         const comp = this;
-        const scale = 10;
+        const scale = 5;
         let style = {
             transform: `scale(${scale})`,
             transformOrigin: 'top left',
@@ -217,7 +217,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         </Typography>
                         <img id="snapshotImage" src={this.state.base64Snapshot}></img>
                         <Tooltip title="Download" placement='top'>
-                            <button className={ this.buttonStyle + "mt-2"}>
+                            <button className={ this.buttonStyle + " mt-4"}>
                                 <a download={ this.props.fontName + "-snapshot.png"} href={ this.state.base64Snapshot }>
                                     <DownloadIcon>
                                     </DownloadIcon>
