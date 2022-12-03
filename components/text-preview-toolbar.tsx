@@ -71,9 +71,9 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
         }
     ]
 
-    renderButton(b: TextPreviewToolbarButton) {
+    renderButton(b: TextPreviewToolbarButton, i: number) {
         return(
-            <Tooltip title={b.title} placement='top'>
+            <Tooltip key={"textPreviewButton" + ++i} title={b.title} placement='top'>
                 <button className={this.buttonStyle} onClick={() => { this.props.onToolButtonClicked(b.action);}}>
                     { b.icon }
                 </button>
@@ -82,8 +82,9 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
     }
 
     render(): React.ReactNode {
+        let i = 1;
         return(
-            <div className='flex justify-start gap-2'>
+            <div key={"textPreviewButton0"} className='flex justify-start gap-2'>
                 <Tooltip title="Download" placement='top'>
                     <button className={this.buttonStyle}>
                         <a href={this.props.fontFilePath} download>
@@ -93,7 +94,7 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
                 </Tooltip>
                 {
                     this.buttonList.map((b) => {
-                        return(this.renderButton(b));
+                        return(this.renderButton(b, ++i));
                     })
                 }
             </div>

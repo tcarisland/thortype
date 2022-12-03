@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { Font } from '../data/font';
 import { Box, Hidden, Modal, Tooltip, Typography } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -21,15 +21,32 @@ export interface TextPreviewState {
 
 export default class TextPreview extends React.Component<TextPreviewProps, TextPreviewState> {
     buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
-
     fontCssName = "tc-" + this.props.fontName.replace(/\/fonts\/(.*?)\//g, "$1");
+    textAreaStyle = "w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 overflow-hidden ";
+    fileInput: HTMLInputElement | undefined = undefined;
     fontStyle = {
         fontFamily: this.fontCssName,
     }
-    textAreaStyle = "w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 overflow-hidden ";
-    
+    boxStyle = {
+        position: 'absolute' as 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 900,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        color: "black",
+        p: 4,
+    };
+
+    setFileInputRef: (element: HTMLInputElement) => void;
+
     constructor(props: TextPreviewProps) {
         super(props);
+        this.setFileInputRef = (element: HTMLInputElement) => {
+            this.fileInput = element;
+        };
         this.state = {
             open: false,
             base64Snapshot: "",
@@ -41,6 +58,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
 
     componentDidMount(): void {
         if(!document) {
+            console.log("document is undefined")
             return;
         }
         const sampleTextArea = document.getElementById("fontDemoTextArea");
@@ -56,7 +74,6 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
     }
 
     increaseFontSize(increaseAmount: number) {
-        console.log({"increaseAmount": increaseAmount});
         const lh = this.state.lineHeight + increaseAmount;
         const fs = this.state.fontSize + increaseAmount;
         this.setState({
@@ -68,6 +85,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
 
     createSnapshot() {
         if(!document) {
+            console.error("document is undefined")
             return;
         }
         let fontTextarea: HTMLElement = document.getElementById("fontDemoTextArea") as HTMLElement;
@@ -95,19 +113,6 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             });
     }
 
-    style = {
-        position: 'absolute' as 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 900,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        color: "black",
-        p: 4,
-    };
-
     handleClose() {
         this.setState({
             ...this.state,
@@ -116,8 +121,36 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
     }
 
     uploadImage() {
-        console.log("uploadImage clicked");
+        this.fileInput?.click();
     }
+
+    handleFileUpload = (event: SyntheticEvent) => {
+        const target = event && event.target as HTMLInputElement;
+        if(target) {
+            const file = (target && target.files) && target.files[0];
+            const base64Image = file && this.convertBase64(file);
+            base64Image && base64Image.then((e) => {
+                const sampleTextArea = document.getElementById("fontDemoTextArea");
+                sampleTextArea && (sampleTextArea.style.background = 'url(' + e + ') no-repeat left top');
+                sampleTextArea && (sampleTextArea.style.backgroundSize = "100%");
+            });
+        }
+    };
+
+    convertBase64 = (file: File) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+    
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+    
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
 
     updateAlignment(alignment: string) {
         this.setState({
@@ -147,10 +180,11 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                 this.increaseFontSize(-4);
                 break;
             case TextPreviewToolbarAction.CAPTION:
-                console.log("caption");
+                this.uploadImage();
                 break;
         }
     }
+
     render(): React.ReactNode {
         return(
             <div>
@@ -161,6 +195,14 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                     </div>
                 </Tooltip>
             <div>
+                <input
+                    ref={this.setFileInputRef}
+                    onChange={this.handleFileUpload}
+                    accept="image/*"
+                    type="file"
+                    style={{ display: "none" }}
+                    multiple={false}
+                />
                 <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
             </div>
                 <Modal
@@ -169,7 +211,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                     >
-                    <Box sx={this.style}>
+                    <Box sx={this.boxStyle}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             { this.props.fontName } snapshot
                         </Typography>
