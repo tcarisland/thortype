@@ -189,13 +189,13 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                                 <FormatAlignRightIcon></FormatAlignRightIcon>
                             </button>
                         </Tooltip>
-                        <Tooltip title="Increase Font Size">
+                        <Tooltip title="Increase Font Size" placement='top'>
                             <button className={ this.buttonStyle } onClick={() => {this.increaseFontSize(4)
                             }}>
                                 <TextIncreaseIcon></TextIncreaseIcon>
                             </button>
                         </Tooltip>
-                        <Tooltip title="Decrease Font Size">
+                        <Tooltip title="Decrease Font Size" placement='top'>
                             <button className={ this.buttonStyle } onClick={() => {this.increaseFontSize(-4)}}>
                                 <TextDecreaseIcon></TextDecreaseIcon>
                             </button>
