@@ -9,6 +9,8 @@ import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
 import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import TextDecreaseIcon from '@mui/icons-material/TextDecrease';
+import TextIncreaseIcon from '@mui/icons-material/TextIncrease';
 import { fontFamily } from '@mui/system';
 
 export interface TextPreviewProps {
@@ -20,7 +22,9 @@ export interface TextPreviewProps {
 export interface TextPreviewState {
     open: boolean,
     base64Snapshot: string,
-    textAreaAlignment: string
+    textAreaAlignment: string,
+    fontSize: number,
+    lineHeight: number
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -40,7 +44,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
     fontStyle = {
         fontFamily: this.fontCssName,
     }
-    textAreaStyle = "text-4xl w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 ";
+    textAreaStyle = "w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 ";
     buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
     
     constructor(props: TextPreviewProps) {
@@ -48,7 +52,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         this.state = {
             open: false,
             base64Snapshot: "",
-            textAreaAlignment: ""
+            textAreaAlignment: "",
+            fontSize: 36,
+            lineHeight: 40
         };        
     }
 
@@ -65,6 +71,17 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         }); 
     }
 
+    increaseFontSize(increaseAmount: number) {
+        console.log({"increaseAmount": increaseAmount});
+        const lh = this.state.lineHeight + increaseAmount;
+        const fs = this.state.fontSize + increaseAmount;
+        this.setState({
+            ...this.state,
+            lineHeight: lh,
+            fontSize: fs
+        });
+    }
+
     createSnapshot() {
         let fontTextarea: HTMLElement = document.getElementById("fontDemoTextArea") as HTMLElement;
         const comp = this;
@@ -72,8 +89,10 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         let style = {
             transform: `scale(${scale})`,
             transformOrigin: 'top left',
-            width: fontTextarea.clientWidth + 'px', // use original width of DOM element to avoid part of the image being cropped out
-            height: fontTextarea.clientHeight + 'px' // use original height of DOM element
+            // use original width of DOM element to avoid part of the image being cropped out
+            width: fontTextarea.clientWidth + 'px',
+            // use original height of DOM element
+            height: fontTextarea.clientHeight + 'px'
         };
         const opt = {
             width: fontTextarea.clientWidth * scale,
@@ -106,11 +125,11 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         this.setState({
             ...this.state,
             open: false
-        })
+        });
     }
 
     uploadImage() {
-        console.log("uploadImage clicked")
+        console.log("uploadImage clicked");
     }
 
     updateAlignment(align: TextPreviewAlign) {
@@ -129,7 +148,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         this.setState({
             ...this.state,
             textAreaAlignment: alignment
-        })
+        });
     }
 
     render(): React.ReactNode {
@@ -137,45 +156,56 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             <div>
                 <Tooltip title="Try the font with your own text" placement='top'>
                     <div>
-                        <div id="fontDemoTextArea" contentEditable="true" className={ this.textAreaStyle + " " + this.state.textAreaAlignment } style={{fontFamily: this.fontCssName}}>
+                        <div id="fontDemoTextArea" contentEditable="true" className={ this.textAreaStyle + " " + this.state.textAreaAlignment } style={{fontFamily: this.fontCssName, fontSize: this.state.fontSize + "px", lineHeight: this.state.lineHeight + "px"}}>
                         </div>
                     </div>
                 </Tooltip>
             <div>
                 <div className='flex justify-start gap-2'>
-                                <Tooltip title="Download" placement='top'>
-                                    <button className={ this.buttonStyle }>
-                                        <a href={this.props.fontFilePath} download>
-                                        <DownloadIcon></DownloadIcon>
-                                        </a>
-                                    </button>
-                                </Tooltip>
-                                <Tooltip title='Take Snapshot' placement='top'>
-                                    <button className={ this.buttonStyle } onClick={() => { this.createSnapshot() }}>
-                                        <CameraAltIcon></CameraAltIcon>
-                                    </button>
-                                </Tooltip>
-                                <Tooltip title="Align Left" placement='top'>
-                                    <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.LEFT)}} >
-                                        <FormatAlignLeftIcon></FormatAlignLeftIcon>
-                                    </button>
-                                </Tooltip>
-                                <Tooltip title="Align Center" placement='top'>
-                                    <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.CENTER)}}>
-                                        <FormatAlignCenterIcon></FormatAlignCenterIcon>
-                                    </button>
-                                </Tooltip>
-                                <Tooltip title="Align Right" placement='top'>
-                                    <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.RIGHT)}}>
-                                        <FormatAlignRightIcon></FormatAlignRightIcon>
-                                    </button>
-                                </Tooltip>
-                                <Tooltip title="Caption Image" placement='top'>
-                                    <button className={ this.buttonStyle } onClick={() => { this.uploadImage()}}>
-                                        <AddPhotoAlternateIcon></AddPhotoAlternateIcon>
-                                    </button>
-                                </Tooltip>
-                            </div>
+                        <Tooltip title="Download" placement='top'>
+                            <button className={ this.buttonStyle }>
+                                <a href={this.props.fontFilePath} download>
+                                <DownloadIcon></DownloadIcon>
+                                </a>
+                            </button>
+                        </Tooltip>
+                        <Tooltip title='Take Snapshot' placement='top'>
+                            <button className={ this.buttonStyle } onClick={() => { this.createSnapshot() }}>
+                                <CameraAltIcon></CameraAltIcon>
+                            </button>
+                        </Tooltip>
+                        <Tooltip title="Align Left" placement='top'>
+                            <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.LEFT)}} >
+                                <FormatAlignLeftIcon></FormatAlignLeftIcon>
+                            </button>
+                        </Tooltip>
+                        <Tooltip title="Align Center" placement='top'>
+                            <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.CENTER)}}>
+                                <FormatAlignCenterIcon></FormatAlignCenterIcon>
+                            </button>
+                        </Tooltip>
+                        <Tooltip title="Align Right" placement='top'>
+                            <button className={ this.buttonStyle } onClick={() => { this.updateAlignment(TextPreviewAlign.RIGHT)}}>
+                                <FormatAlignRightIcon></FormatAlignRightIcon>
+                            </button>
+                        </Tooltip>
+                        <Tooltip title="Increase Font Size">
+                            <button className={ this.buttonStyle } onClick={() => {this.increaseFontSize(4)
+                            }}>
+                                <TextIncreaseIcon></TextIncreaseIcon>
+                            </button>
+                        </Tooltip>
+                        <Tooltip title="Decrease Font Size">
+                            <button className={ this.buttonStyle } onClick={() => {this.increaseFontSize(-4)}}>
+                                <TextDecreaseIcon></TextDecreaseIcon>
+                            </button>
+                        </Tooltip>
+                        <Tooltip title="Caption Image" placement='top'>
+                            <button className={ this.buttonStyle } onClick={() => { this.uploadImage()}}>
+                                <AddPhotoAlternateIcon></AddPhotoAlternateIcon>
+                            </button>
+                        </Tooltip>
+                    </div>
                 </div>
                 <Modal
                     open={this.state.open}
@@ -189,7 +219,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         </Typography>
                         <img id="snapshotImage" src={this.state.base64Snapshot}></img>
                         <Tooltip title="Download" placement='top'>
-                            <button className={ this.buttonStyle }>
+                            <button className={ this.buttonStyle + "mt-2"}>
                                 <a download={ this.props.fontName + "-snapshot.png"} href={this.state.base64Snapshot}>
                                     <DownloadIcon>
                                     </DownloadIcon>
