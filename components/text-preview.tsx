@@ -1,7 +1,6 @@
 import React from 'react';
 import { Font } from '../data/font';
-import { GetStaticProps } from 'next';
-import { Box, Modal, Tooltip, Typography } from '@mui/material';
+import { Box, Hidden, Modal, Tooltip, Typography } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import domtoimage from 'dom-to-image';
 import TextPreviewToolbar, { TextPreviewToolbarAction } from './text-preview-toolbar';
@@ -20,12 +19,6 @@ export interface TextPreviewState {
     lineHeight: number
 }
 
-export enum TextPreviewAlign {
-    LEFT,
-    CENTER,
-    RIGHT
-}
-
 export default class TextPreview extends React.Component<TextPreviewProps, TextPreviewState> {
     buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
 
@@ -33,7 +26,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
     fontStyle = {
         fontFamily: this.fontCssName,
     }
-    textAreaStyle = "w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 ";
+    textAreaStyle = "w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 overflow-hidden ";
     
     constructor(props: TextPreviewProps) {
         super(props);
@@ -126,19 +119,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         console.log("uploadImage clicked");
     }
 
-    updateAlignment(align: TextPreviewAlign) {
-        let alignment: string = "";
-        switch(align) {
-            case TextPreviewAlign.LEFT:
-                alignment = "text-left";
-                break;
-            case TextPreviewAlign.CENTER:
-                alignment = "text-center";
-                break;
-            case TextPreviewAlign.RIGHT:
-                alignment = "text-right";
-                break;
-        }
+    updateAlignment(alignment: string) {
         this.setState({
             ...this.state,
             textAreaAlignment: alignment
@@ -151,19 +132,19 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                 this.createSnapshot();
                 break;
             case TextPreviewToolbarAction.ALIGN_LEFT:
-                this.updateAlignment(TextPreviewAlign.LEFT);
+                this.updateAlignment("text-left");
                 break;
             case TextPreviewToolbarAction.ALIGN_CENTER:
-                this.updateAlignment(TextPreviewAlign.CENTER);
+                this.updateAlignment("text-center");
                 break;
             case TextPreviewToolbarAction.ALIGN_RIGHT:
-                this.updateAlignment(TextPreviewAlign.RIGHT);
+                this.updateAlignment("text-right");
                 break;
             case TextPreviewToolbarAction.INCREASE_FONT_SIZE:
-                this.increaseFontSize(2);
+                this.increaseFontSize(4);
                 break;
             case TextPreviewToolbarAction.DECREASE_FONT_SIZE:
-                this.increaseFontSize(-2);
+                this.increaseFontSize(-4);
                 break;
             case TextPreviewToolbarAction.CAPTION:
                 console.log("caption");
@@ -180,8 +161,8 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                     </div>
                 </Tooltip>
             <div>
-                <TextPreviewToolbar fontFilePath={(this.props.fontFilePath)} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
-                </div>
+                <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
+            </div>
                 <Modal
                     open={this.state.open}
                     onClose={() => { this.handleClose() }}
