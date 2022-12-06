@@ -4,6 +4,9 @@ import { Box, Hidden, Modal, Tooltip, Typography } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import domtoimage from 'dom-to-image';
 import TextPreviewToolbar, { TextPreviewToolbarAction } from './text-preview-toolbar';
+import { timeStamp } from 'console';
+import Head from 'next/head';
+import { getAutoHeightDuration } from '@mui/material/styles/createTransitions';
 
 export interface TextPreviewProps {
     fontFilePath: string,
@@ -16,13 +19,13 @@ export interface TextPreviewState {
     base64Snapshot: string,
     textAreaAlignment: string,
     fontSize: number,
-    lineHeight: number
+    lineHeight: number,
+    areaWidth: number,
+    areaHeight: number
 }
 
 export default class TextPreview extends React.Component<TextPreviewProps, TextPreviewState> {
-    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
     fontCssName = "tc-" + this.props.fontName.replace(/\/fonts\/(.*?)\//g, "$1");
-    textAreaStyle = "w-full mb-2 bg-slate-100 p-2 pb-32 h-screen-70 overflow-hidden ";
     fileInput: HTMLInputElement | undefined = undefined;
     fontStyle = {
         fontFamily: this.fontCssName,
@@ -52,7 +55,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             base64Snapshot: "",
             textAreaAlignment: "",
             fontSize: 36,
-            lineHeight: 40
+            lineHeight: 40,
+            areaWidth: 820,
+            areaHeight: 480
         };        
     }
 
@@ -63,6 +68,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         }
         const sampleTextArea = document.getElementById("fontDemoTextArea");
         sampleTextArea && (sampleTextArea.innerHTML = this.props.font.meta.sampleText);
+        //window.addEventListener('resize', () => {console.log("")})
     }
 
     updateSnapshot(snapshot: string) {
@@ -88,15 +94,13 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             console.error("document is undefined")
             return;
         }
-        let fontTextarea: HTMLElement = document.getElementById("fontDemoTextArea") as HTMLElement;
+        let fontTextarea: HTMLElement = document.getElementById("fontAreaContainerDiv") as HTMLElement;
         const comp = this;
-        const scale = 5;
+        const scale = 3;
         let style = {
             transform: `scale(${scale})`,
             transformOrigin: 'top left',
-            // use original width of DOM element to avoid part of the image being cropped out
             width: fontTextarea.clientWidth + 'px',
-            // use original height of DOM element
             height: fontTextarea.clientHeight + 'px'
         };
         const opt = {
@@ -128,12 +132,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         const target = event && event.target as HTMLInputElement;
         if(target) {
             const file = (target && target.files) && target.files[0];
-            const base64Image = file && this.convertBase64(file);
-            base64Image && base64Image.then((e) => {
-                const sampleTextArea = document.getElementById("fontDemoTextArea");
-                sampleTextArea && (sampleTextArea.style.background = 'url(' + e + ') no-repeat left top');
-                sampleTextArea && (sampleTextArea.style.backgroundSize = "100%");
-            });
+            file && this.convertBase64(file);
         }
     };
 
@@ -141,12 +140,37 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);
-    
-            fileReader.onload = () => {
-                resolve(fileReader.result);
+            fileReader.onloadend = (e) => {
+                console.log(e);
+                let myCanvas = document.getElementById("fontDemoTextCanvas");
+                let myImage = new Image();
+                if(myCanvas && myImage && e.target?.result) {
+                    myImage.src = e.target?.result.toString();
+                    myImage.onload = () => {
+                        var myContext = (myCanvas as HTMLCanvasElement).getContext("2d"); 
+                        console.log({
+                            "ow": myImage.width, "oh": myImage.height, 
+                            "sw": this.state.areaWidth, "sh": this.state.areaHeight
+                        })
+                        let widthRatio = (this.state.areaWidth * 1.0) / (myImage.width * 1.0);
+                        let width = myImage.width * widthRatio;
+                        let height = myImage.height * widthRatio;
+                        console.log({
+                            "widthRatio": widthRatio,
+                            "mIw": myImage.width,
+                            "mIh": myImage.height,
+                            "width": width,
+                            "height": height
+                        });
+                        myContext?.drawImage(myImage, 0, 0, myImage.width * widthRatio, myImage.height * widthRatio);
+                    }
+                } else {
+                    console.log("could not find canvas");
+                }                
             };
     
             fileReader.onerror = (error) => {
+                console.log({"error": error});
                 reject(error);
             };
         });
@@ -185,12 +209,33 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         }
     }
 
+    textAreaDynamicStyle(): any {
+        return {
+            fontFamily: this.fontCssName,
+            fontSize: this.state.fontSize + "px",
+            lineHeight: this.state.lineHeight + "px",
+            width: this.state.areaWidth,
+            height: this.state.areaHeight
+        }
+    }
+
+    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 mt-2 rounded ";
+    textAreaStyle = "col-span-full row-span-full dark:text-slate-900 overflow-hidden ";
+
     render(): React.ReactNode {
         return(
             <div>
                 <Tooltip title="Try the font with your own text" placement='top'>
-                    <div>
-                        <div id="fontDemoTextArea" contentEditable="true" className={ this.textAreaStyle + " " + this.state.textAreaAlignment } style={{fontFamily: this.fontCssName, fontSize: this.state.fontSize + "px", lineHeight: this.state.lineHeight + "px"}}>
+                    <div id="fontAreaContainerDiv" className="grid grid-cols-1 grid-rows-1 mb-2" style={{width : this.state.areaWidth, height: this.state.areaHeight}}>
+                        <canvas id="fontDemoTextCanvas" 
+                        className={this.textAreaStyle}
+                        width={this.state.areaWidth}
+                        height={this.state.areaHeight}>
+                        </canvas>
+                        <div id="fontDemoTextArea"
+                        contentEditable="true"
+                        className={ this.textAreaStyle + " " + this.state.textAreaAlignment }
+                        style={ this.textAreaDynamicStyle() }>
                         </div>
                     </div>
                 </Tooltip>
