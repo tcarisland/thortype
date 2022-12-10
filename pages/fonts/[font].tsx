@@ -29,7 +29,7 @@ const FontPage: NextPage = () => {
     const fontObj: Font | undefined = FontService.findFont(font);
 
     return (
-        <div className="m-2 lg:h-screen-85 md:h-screen sm:h-screen grid lg:grid-cols-4 md:grid-cols-1 sm:grid-cols-4 p-12 justify-center dark:text-slate-900 text-slate-900">
+        <div className="m-1 lg:h-screen md:h-screen sm:h-screen grid p-4 justify-center dark:text-slate-900 text-slate-900">
             <Head>
                 <title>
                     { (fontObj && fontObj.name.charAt(0).toUpperCase() + fontObj.name.slice(1)) || "ThorType" }
@@ -48,35 +48,7 @@ const FontPage: NextPage = () => {
             }
             {
                 fontObj &&
-                <div className='mr-8'>
-                    <div>
-                        <Image className="fontPageImage" id={fontObj?.name} alt={font} src={"../../fonts/" + font + ".jpg"} width="300px" height="200px">
-                        </Image>
-                    </div>
-                    <div >
-                        <p>
-                            { fontObj.meta.description }
-                        </p>
-                        <br>
-                        </br>
-                        <p>
-                            This font is free for personal use.
-                        </p>
-                        <br>
-                        </br>
-                        <p>
-                            For commercial use, please purchase a license 
-                            { fontObj.meta.licenseUrl  &&
-                                <a className='font-bold' href={ fontObj.meta.licenseUrl }> here</a> ||
-                                <a className='font-bold' href={ "https://www.creativefabrica.com/designer/thorchristopherarisland/ref/38065" }> here</a>
-                            }
-                        </p>
-                    </div>
-                </div>
-            }
-            {
-                fontObj &&
-                <div className='lg:col-start-2 lg:col-span-3'>
+                <div className=''>
                     <TextPreview  fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)}></TextPreview>
                 </div>
                     

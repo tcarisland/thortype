@@ -1,12 +1,10 @@
 import React, { SyntheticEvent } from 'react';
 import { Font } from '../data/font';
-import { Box, Hidden, Modal, Tooltip, Typography } from '@mui/material';
+import { Box, Modal, Tooltip, Typography } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import domtoimage from 'dom-to-image';
 import TextPreviewToolbar, { TextPreviewToolbarAction } from './text-preview-toolbar';
-import { timeStamp } from 'console';
-import Head from 'next/head';
-import { getAutoHeightDuration } from '@mui/material/styles/createTransitions';
+import { toCanvasSize, sizes, CanvasSize } from '../services/canvas-size-service';
 
 export interface TextPreviewProps {
     fontFilePath: string,
@@ -20,8 +18,7 @@ export interface TextPreviewState {
     textAreaAlignment: string,
     fontSize: number,
     lineHeight: number,
-    areaWidth: number,
-    areaHeight: number
+    area: CanvasSize,
 }
 
 export default class TextPreview extends React.Component<TextPreviewProps, TextPreviewState> {
@@ -35,7 +32,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 900,
+        width: '60%',
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
@@ -56,19 +53,32 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             textAreaAlignment: "",
             fontSize: 36,
             lineHeight: 40,
-            areaWidth: 820,
-            areaHeight: 480
+            area: sizes[3]
         };        
     }
 
     componentDidMount(): void {
-        if(!document) {
+        if(!document || !window) {
             console.log("document is undefined")
             return;
         }
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        this.setState({
+            ...this.state,
+            area: toCanvasSize({width: w, height: h})
+        });
         const sampleTextArea = document.getElementById("fontDemoTextArea");
         sampleTextArea && (sampleTextArea.innerHTML = this.props.font.meta.sampleText);
-        //window.addEventListener('resize', () => {console.log("")})
+        window.addEventListener('resize', () => {
+            let w = window.innerWidth;
+            let h = window.innerHeight;
+            console.log({"w": w, "h": h, "canvasSize": toCanvasSize({width: w, height: h})});
+            this.setState({
+                ...this.state,
+                area: toCanvasSize({width: w, height: h})
+            });
+        })
     }
 
     updateSnapshot(snapshot: string) {
@@ -150,9 +160,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         var myContext = (myCanvas as HTMLCanvasElement).getContext("2d"); 
                         console.log({
                             "ow": myImage.width, "oh": myImage.height, 
-                            "sw": this.state.areaWidth, "sh": this.state.areaHeight
+                            "sw": this.state.area.width, "sh": this.state.area.height
                         })
-                        let widthRatio = (this.state.areaWidth * 1.0) / (myImage.width * 1.0);
+                        let widthRatio = (this.state.area.width * 1.0) / (myImage.width * 1.0);
                         let width = myImage.width * widthRatio;
                         let height = myImage.height * widthRatio;
                         console.log({
@@ -214,23 +224,23 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             fontFamily: this.fontCssName,
             fontSize: this.state.fontSize + "px",
             lineHeight: this.state.lineHeight + "px",
-            width: this.state.areaWidth,
-            height: this.state.areaHeight
+            width: this.state.area.width,
+            height: this.state.area.height
         }
     }
 
-    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 mt-2 rounded ";
+    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-1 mb-2 rounded ";
     textAreaStyle = "col-span-full row-span-full dark:text-slate-900 overflow-hidden ";
 
     render(): React.ReactNode {
         return(
-            <div>
-                <Tooltip title="Try the font with your own text" placement='top'>
-                    <div id="fontAreaContainerDiv" className="grid grid-cols-1 grid-rows-1 mb-2" style={{width : this.state.areaWidth, height: this.state.areaHeight}}>
+            <div className='grid lg:grid-cols-10 sm:grid-cols-1 justify-center'>
+                <Tooltip className='lg:col-start-2 lg:grid-span-8 sm:col-start-1 sm:col-span-1' title="Try the font with your own text" placement='left'>
+                    <div id="fontAreaContainerDiv" className="grid grid-cols-1 grid-rows-1 mb-2" style={{width : this.state.area.width, height: this.state.area.height}}>
                         <canvas id="fontDemoTextCanvas" 
                         className={this.textAreaStyle}
-                        width={this.state.areaWidth}
-                        height={this.state.areaHeight}>
+                        width={this.state.area.width}
+                        height={this.state.area.height}>
                         </canvas>
                         <div id="fontDemoTextArea"
                         contentEditable="true"
@@ -239,6 +249,11 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         </div>
                     </div>
                 </Tooltip>
+                <div className='grid lg:col-start-10 lg:grid-cols-1 sm:col-start-1 sm:col-span-1'>
+                    <div>
+                        <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
+                    </div>
+                </div>
             <div>
                 <input
                     ref={this.setFileInputRef}
@@ -248,21 +263,15 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                     style={{ display: "none" }}
                     multiple={false}
                 />
-                <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
-            </div>
-                <Modal
-                    open={this.state.open}
+           </div>
+                <Modal open={this.state.open}
                     onClose={() => { this.handleClose() }}
                     aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                    >
+                    aria-describedby="modal-modal-description">
                     <Box sx={this.boxStyle}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            { this.props.fontName } snapshot
-                        </Typography>
                         <img id="snapshotImage" src={this.state.base64Snapshot}></img>
                         <Tooltip title="Download" placement='top'>
-                            <button className={ this.buttonStyle + " mt-4"}>
+                            <button className={ this.buttonStyle}>
                                 <a download={ this.props.fontName + "-snapshot.png"} href={ this.state.base64Snapshot }>
                                     <DownloadIcon>
                                     </DownloadIcon>

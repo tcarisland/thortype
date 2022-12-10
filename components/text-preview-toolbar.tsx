@@ -32,7 +32,7 @@ interface TextPreviewToolbarButton {
 }
 
 export default class TextPreviewToolbar extends React.Component<TextPreviewToolbarProps> {
-    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded";
+    buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded w-12 h-12";
     buttonList: TextPreviewToolbarButton[] = [
         {
             action: TextPreviewToolbarAction.SNAPSHOT,
@@ -73,7 +73,7 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
 
     renderButton(b: TextPreviewToolbarButton, i: number) {
         return(
-            <Tooltip key={"textPreviewButton" + ++i} title={b.title} placement='top'>
+            <Tooltip key={"textPreviewButton" + ++i} title={b.title} placement='left'>
                 <button className={this.buttonStyle} onClick={() => { this.props.onToolButtonClicked(b.action);}}>
                     { b.icon }
                 </button>
@@ -84,8 +84,8 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
     render(): React.ReactNode {
         let i = 1;
         return(
-            <div key={"textPreviewButton0"} className='flex justify-start gap-2'>
-                <Tooltip title="Download" placement='top'>
+            <div key={"textPreviewButton0"} className='flex lg:flex-col sm:flex-row justify-start gap-2'>
+                <Tooltip title="Download" placement='left'>
                     <button className={this.buttonStyle}>
                         <a href={this.props.fontFilePath} download>
                             <DownloadIcon></DownloadIcon>
