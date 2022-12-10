@@ -53,6 +53,10 @@ a {
   border-radius: 3px;
 }
 
+.fontPreviewTemplateColumns {
+  grid-template-columns: 10% 80% 10%;
+}
+
 @media only screen and (max-width: 800px) {
   .fontList {
     grid-template-columns: repeat(1, 1fr);

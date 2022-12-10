@@ -81,11 +81,13 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
         )
     }
 
+
+
     render(): React.ReactNode {
         let i = 1;
         return(
-            <div key={"textPreviewButton0"} className='flex lg:flex-col sm:flex-row justify-start gap-2'>
-                <Tooltip title="Download" placement='left'>
+            <div className='grid grid-flow-col justify-start gap-2 lg:grid-rows-1 md:grid-rows-2 sm:grid-rows-3'>
+                <Tooltip key={"textPreviewButton0"}  title="Download" placement='left'>
                     <button className={this.buttonStyle}>
                         <a href={this.props.fontFilePath} download>
                             <DownloadIcon></DownloadIcon>

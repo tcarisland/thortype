@@ -29,7 +29,7 @@ const FontPage: NextPage = () => {
     const fontObj: Font | undefined = FontService.findFont(font);
 
     return (
-        <div className="m-1 lg:h-screen md:h-screen sm:h-screen grid p-4 justify-center dark:text-slate-900 text-slate-900">
+        <div className="m-1 p-4 justify-center dark:text-slate-900 text-slate-900">
             <Head>
                 <title>
                     { (fontObj && fontObj.name.charAt(0).toUpperCase() + fontObj.name.slice(1)) || "ThorType" }

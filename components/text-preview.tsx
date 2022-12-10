@@ -54,7 +54,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             fontSize: 36,
             lineHeight: 40,
             area: sizes[3]
-        };        
+        };
     }
 
     componentDidMount(): void {
@@ -234,9 +234,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
 
     render(): React.ReactNode {
         return(
-            <div className='grid lg:grid-cols-10 sm:grid-cols-1 justify-center'>
-                <Tooltip className='lg:col-start-2 lg:grid-span-8 sm:col-start-1 sm:col-span-1' title="Try the font with your own text" placement='left'>
-                    <div id="fontAreaContainerDiv" className="grid grid-cols-1 grid-rows-1 mb-2" style={{width : this.state.area.width, height: this.state.area.height}}>
+            <div className='grid grid-cols-3 justify-center m-auto fontPreviewTemplateColumns '>
+                <Tooltip className='col-start-2 grid-span-1 justify-center m-auto ' title="Try the font with your own text" placement='left'>
+                    <div id="fontAreaContainerDiv" className="grid justify-center grid-cols-1 grid-rows-1 mb-2" style={{width : this.state.area.width, height: this.state.area.height}}>
                         <canvas id="fontDemoTextCanvas" 
                         className={this.textAreaStyle}
                         width={this.state.area.width}
@@ -249,7 +249,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         </div>
                     </div>
                 </Tooltip>
-                <div className='grid lg:col-start-10 lg:grid-cols-1 sm:col-start-1 sm:col-span-1'>
+                <div className='grid row-start-2 col-start-2 grid-span-1 m-auto '>
                     <div>
                         <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
                     </div>
