@@ -15,6 +15,11 @@ export interface TextPreviewToolbarProps {
     fontFilePath: string
 }
 
+export interface TextPreviewToolbarState {
+    buttonListColumns: string,
+    buttonListRows: string
+}
+
 export enum TextPreviewToolbarAction {
     SNAPSHOT,
     ALIGN_LEFT,
@@ -31,7 +36,7 @@ interface TextPreviewToolbarButton {
     title: string
 }
 
-export default class TextPreviewToolbar extends React.Component<TextPreviewToolbarProps> {
+export default class TextPreviewToolbar extends React.Component<TextPreviewToolbarProps, TextPreviewToolbarState> {
     buttonStyle = "bg-gray-300 hover:bg-gray-400 text-gray-800 p-2 rounded w-12 h-12";
     buttonList: TextPreviewToolbarButton[] = [
         {
@@ -71,6 +76,34 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
         }
     ]
 
+    constructor(props: TextPreviewToolbarProps) {
+        super(props);
+        this.state = {
+            buttonListColumns: "repeat(" + (this.buttonList.length + 1) + ", 1fr)",
+            buttonListRows: "repeat(1, 1fr)"
+        }
+    }
+    
+    componentDidMount(): void {
+        this.updateButtonListGrid();
+        window.addEventListener('resize', () => {
+            this.updateButtonListGrid();
+        })
+    }
+
+    updateButtonListGrid(): void {
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        const columns = Math.round((w - 100) / 60);
+        const rows = Math.round((this.buttonList.length + 1) / columns);
+        this.setState({
+            ...this.state,
+            buttonListColumns: "repeat(" + columns + ", 1fr)",
+            buttonListRows: "repeat(" + rows + ", 1fr)"
+        })
+    }
+    
+
     renderButton(b: TextPreviewToolbarButton, i: number) {
         return(
             <Tooltip key={"textPreviewButton" + ++i} title={b.title} placement='left'>
@@ -81,12 +114,10 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
         )
     }
 
-
-
     render(): React.ReactNode {
         let i = 1;
         return(
-            <div className='grid grid-flow-col justify-start gap-2 lg:grid-rows-1 md:grid-rows-2 sm:grid-rows-3'>
+            <div className='grid grid-flow-col justify-start gap-2' style={{gridTemplateColumns: this.state.buttonListColumns, gridTemplateRows: this.state.buttonListRows}}>
                 <Tooltip key={"textPreviewButton0"}  title="Download" placement='left'>
                     <button className={this.buttonStyle}>
                         <a href={this.props.fontFilePath} download>

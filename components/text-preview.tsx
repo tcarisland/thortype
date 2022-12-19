@@ -71,9 +71,8 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         const sampleTextArea = document.getElementById("fontDemoTextArea");
         sampleTextArea && (sampleTextArea.innerHTML = this.props.font.meta.sampleText);
         window.addEventListener('resize', () => {
-            let w = window.innerWidth;
-            let h = window.innerHeight;
-            console.log({"w": w, "h": h, "canvasSize": toCanvasSize({width: w, height: h})});
+            const w = window.innerWidth;
+            const h = window.innerHeight;
             this.setState({
                 ...this.state,
                 area: toCanvasSize({width: w, height: h})
@@ -249,7 +248,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                         </div>
                     </div>
                 </Tooltip>
-                <div className='grid row-start-2 col-start-2 grid-span-1 m-auto '>
+                <div className='row-start-2 col-start-2 grid-span-1 m-auto '>
                     <div>
                         <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
                     </div>

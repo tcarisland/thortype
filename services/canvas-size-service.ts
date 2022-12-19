@@ -16,7 +16,6 @@ export const sizes: CanvasSize[] = [
 ]
 
 export const toCanvasSize = function(size: CanvasSize): CanvasSize {
-    console.log({"size": size});
     let w: CanvasSize | undefined = sizes.filter(s => { 
         return ((size.width / 1.2) > s.width)
     })?.at(0);
