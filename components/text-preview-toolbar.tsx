@@ -93,7 +93,6 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
 
     updateButtonListGrid(): void {
         let w = window.innerWidth;
-        let h = window.innerHeight;
         const columns = Math.round((w - 100) / 60);
         const rows = Math.round((this.buttonList.length + 1) / columns);
         this.setState({

@@ -32,7 +32,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '60%',
+        width: '70%',
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
@@ -249,7 +249,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                     </div>
                 </Tooltip>
                 <div className='row-start-2 col-start-2 grid-span-1 m-auto '>
-                    <div>
+                    <div className='' style={{width: this.state.area.width}}>
                         <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
                     </div>
                 </div>
