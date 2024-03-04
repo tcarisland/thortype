@@ -30,10 +30,6 @@ const About: NextPage = () => {
                         <p>
                             For feedback, bug reports and improvement suggestions for my work, feel free to contact me on the contact page <a href="../contact">here</a>.
                         </p>
-                        <br></br>
-                        <p>
-                            If you feel like supporting my work, you can send tips using various cryptocurrencies to thortype.eth (eth, matic) and thortype.nft (eth, matic, btc, sol, ltc, zil, trx, vet and ada). Please note that to buy a commercial licence for any of my fonts, Creative Fabrica is the place to go.
-                        </p>
                     </div>
                     <div style={{gridColumn: "8 / span 1"}}>
                     <Image src={"../images/prof-500x500.jpeg"} alt="profile" width={500} height={500}></Image>
