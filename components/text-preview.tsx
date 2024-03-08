@@ -137,6 +137,11 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         this.fileInput?.click();
     }
 
+    listCharacters() {
+      console.log("list characters clicked");
+      alert("Hello");
+    }
+
     handleFileUpload = (event: SyntheticEvent) => {
         const target = event && event.target as HTMLInputElement;
         if(target) {
@@ -214,6 +219,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                 break;
             case TextPreviewToolbarAction.CAPTION:
                 this.uploadImage();
+                break;
+            case TextPreviewToolbarAction.LIST_CHARACTERS:
+                this.listCharacters();
                 break;
         }
     }
