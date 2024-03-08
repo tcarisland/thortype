@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 
 import com.thortype.tools.opentype.OpenTypeMetaExtractor;
+import com.thortype.tools.services.FontParser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,11 +28,11 @@ class RendererTest {
 	@Autowired
 	private FontTypescriptRenderer fontRenderer;
   @Autowired
-  private OpenTypeMetaExtractor openTypeDataExtractor;
+  private FontParser fontParser;
 
 	@Test
 	void printDefinitions() throws SecurityException, ClassNotFoundException {
-		Font font = Font.parse(new File("./tuscan-modular.ttf").toPath(), openTypeDataExtractor);
+		Font font = fontParser.parse(new File("./tuscan-modular.ttf").toPath());
 		assertEquals(font.getName(), "tuscan-modular");
 		log.info("\n{}", definitionRenderer.render());
 		log.info("\n{}", standardRenderer.render());
@@ -39,7 +40,7 @@ class RendererTest {
 
 	@Test
 	void printFont() {
-		Font font = Font.parse(new File("./tuscan-modular.ttf").toPath(), openTypeDataExtractor);
+		Font font = fontParser.parse(new File("./tuscan-modular.ttf").toPath());
 		font.setEncoding("encoding goes here");
 		log.info("\n{}", fontRenderer.render(font));
 	}

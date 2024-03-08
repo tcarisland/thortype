@@ -6,14 +6,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import com.thortype.tools.json.MetaDefinitionTypescriptRenderer;
+import com.thortype.tools.json.*;
 import jdk.jfr.MetadataDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.thortype.tools.json.FontDefinitionTypescriptRenderer;
-import com.thortype.tools.json.FontStandardTypescriptRenderer;
-import com.thortype.tools.json.FontTypescriptRenderer;
 import com.thortype.tools.model.Font;
 import com.thortype.tools.utils.Base64FontReader;
 
@@ -31,6 +28,10 @@ public class FontWriter {
 	private FontDefinitionTypescriptRenderer fontDefinitionTypescriptRenderer;
 	@Autowired
 	private FontStandardTypescriptRenderer fontStandardTypescriptRenderer;
+  @Autowired
+  private CharacterMapDefinitionTypescriptRenderer characterMapDefinitionTypescriptRenderer;
+  @Autowired
+  private CharacterDefinitionTypescriptRenderer characterDefinitionTypescriptRenderer;
 	@Autowired
 	private FontTypescriptRenderer fontRenderer;
   @Autowired
@@ -42,6 +43,8 @@ public class FontWriter {
 			PrintWriter pw = new PrintWriter(outFile);
 			pw.println(fontStandardTypescriptRenderer.render());
 			pw.println(fontDefinitionTypescriptRenderer.render());
+      pw.println(characterMapDefinitionTypescriptRenderer.render());
+      pw.println(characterDefinitionTypescriptRenderer.render());
       pw.println(metaRenderer.render());
 			pw.close();
 		} catch (FileNotFoundException e) {

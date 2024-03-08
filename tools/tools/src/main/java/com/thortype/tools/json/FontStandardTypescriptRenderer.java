@@ -11,11 +11,11 @@ import com.thortype.tools.types.FontStandard;
 
 @Component
 public class FontStandardTypescriptRenderer extends TypescriptRenderer<List<String>>{
-	
+
 	public String getFields() {
 		return getFieldList().stream().collect(Collectors.joining(",\n"));
 	}
-	
+
 	public List<String> getFieldList() {
 		return Arrays
 				.stream(FontStandard.values())
@@ -37,6 +37,5 @@ public class FontStandardTypescriptRenderer extends TypescriptRenderer<List<Stri
 	public Object render() {
 		return render(this.getFieldList());
 	}
-	
-	
+
 }

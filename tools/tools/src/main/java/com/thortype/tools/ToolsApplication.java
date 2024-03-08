@@ -34,15 +34,11 @@ public class ToolsApplication {
 
 	@PostConstruct
 	public void onInit() {
-    if(System.getProperty("productionRun") != null) {
-      log.info("found productionRun argument, printing files");
-      List<Font> fonts = directoryHelper.listFontDir(toolsProperties.getFontDir());
-      File outputDir = new File(toolsProperties.getOutDir());
-      fontWriter.printFont(outputDir, fonts);
-      fontWriter.printFontDefinition(outputDir);
-    } else {
-      log.info("not a production run");
-    }
+    log.info("found productionRun argument, printing files");
+    List<Font> fonts = directoryHelper.listFontDir(toolsProperties.getFontDir());
+    File outputDir = new File(toolsProperties.getOutDir());
+    fontWriter.printFont(outputDir, fonts);
+    fontWriter.printFontDefinition(outputDir);
 	}
 
 }

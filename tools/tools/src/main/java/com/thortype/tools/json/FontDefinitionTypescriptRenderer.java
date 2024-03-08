@@ -5,10 +5,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Component;
-
 import com.thortype.tools.model.Font;
 import com.thortype.tools.typescript.FontTsxField;
+import org.springframework.stereotype.Component;
 
 @Component
 public class FontDefinitionTypescriptRenderer extends TypescriptRenderer<Map<String, String>> {
@@ -24,18 +23,7 @@ public class FontDefinitionTypescriptRenderer extends TypescriptRenderer<Map<Str
 	}
 
 	public String render() {
-		return render(getFieldMap());
-	}
-
-	public Map<String, String> getFieldMap() {
-		return Arrays
-			.stream(Font.class.getDeclaredFields())
-			.filter(field -> field.isAnnotationPresent(FontTsxField.class))
-			.map(field -> {
-				field.setAccessible(true);
-				return Arrays.asList(field.getName(), field.getDeclaredAnnotation(FontTsxField.class).value());
-			})
-			.collect(Collectors.toMap(e -> e.get(0), e -> e.get(1)));
+		return render(getFieldMap(Font.class.getDeclaredFields()));
 	}
 
 }

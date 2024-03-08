@@ -1,6 +1,5 @@
 package com.thortype.tools.json;
 
-import com.thortype.tools.model.Font;
 import com.thortype.tools.opentype.OpenTypeMeta;
 import com.thortype.tools.typescript.FontTsxField;
 import org.springframework.stereotype.Component;
