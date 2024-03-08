@@ -27,7 +27,7 @@ public class FontParser {
 
   }
 
-  public Font parse(Path path) {
+  public Font parse(Path path) throws Exception {
     Font font = new Font();
     font.setPath(path);
     font.setType(FontStandard.parse(path.toFile().getPath()));
