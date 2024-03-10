@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React, {ReactElement, SyntheticEvent} from 'react';
 import { Font } from '../data/font';
 
 export interface CharacterListProps {
@@ -47,7 +47,7 @@ export default class CharacterList extends React.Component<CharacterListProps, C
       })
     }
 
-    renderGlyph(glyph: number, i: number): String {
+    renderGlyph(glyph: number, i: number): ReactElement<any, any> {
       let unicodeString = String.fromCharCode(glyph);
       return <div style={{border: "1px solid black", padding: "1em", margin: "1em", textAlign: "center"}} key={"glyphPreviewBox" + i}>
         { unicodeString }
