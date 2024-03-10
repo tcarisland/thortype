@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class OpenTypeCharacter {
-  @FontTsxField
-  private String name;
-  @FontTsxField
-  private long characterIndex;
+  @FontTsxField("number")
+  private int subtableIndex;
+  @FontTsxField("number")
+  private int[] characterIndex;
 }

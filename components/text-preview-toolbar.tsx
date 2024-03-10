@@ -112,7 +112,7 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
 
     renderButton(b: TextPreviewToolbarButton, i: number) {
         return(
-            <Tooltip key={"textPreviewButton" + ++i} title={b.title} placement='left'>
+            <Tooltip key={"textPreviewButton" + i} title={b.title} placement='left'>
                 <button className={this.buttonStyle} onClick={() => { this.props.onToolButtonClicked(b.action);}}>
                     { b.icon }
                 </button>

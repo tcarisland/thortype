@@ -1,5 +1,6 @@
 package com.thortype.tools.json;
 
+import com.thortype.tools.opentype.OpenTypeSubtable;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -8,11 +9,11 @@ import java.util.Map;
 public class CharacterDefinitionTypescriptRenderer extends TypescriptRenderer<Map<String, String>> {
   @Override
   public String render(Map<String, String> obj) {
-    return renderDefinitionFromMap("Glyph", obj);
+    return renderDefinitionFromMap("Subtable", obj);
   }
 
   public String render() {
-    return render(getFieldMap(Character.class.getDeclaredFields()));
+    return render(getFieldMap(OpenTypeSubtable.class.getDeclaredFields()));
   }
 
 }
