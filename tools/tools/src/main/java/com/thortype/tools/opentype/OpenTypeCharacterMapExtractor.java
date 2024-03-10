@@ -1,16 +1,12 @@
 package com.thortype.tools.opentype;
 
-import com.thortype.tools.model.Font;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.fontbox.cff.CFFCharset;
-import org.apache.fontbox.ttf.CFFTable;
-import org.apache.fontbox.ttf.OpenTypeFont;
+import org.apache.fontbox.ttf.*;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -24,7 +20,7 @@ public class OpenTypeCharacterMapExtractor {
     }
     OpenTypeCharacterMap map = new OpenTypeCharacterMap();
     map.setNumberOfGlyphs(0);
-    map.setCharacters(new OpenTypeCharacter[]{});
+    map.setSubtables(new ArrayList<>());
     return map;
   }
 
@@ -36,26 +32,36 @@ public class OpenTypeCharacterMapExtractor {
       .filter(u -> u instanceof CFFTable)
       .findAny()
       .orElse(null);
-    if(table != null) {
+    CmapTable cmapTable = (CmapTable) openTypeFont
+      .getTables()
+      .stream()
+      .filter(u -> u instanceof  CmapTable)
+      .findAny()
+      .orElse(null);
+      if(table != null) {
       CFFCharset charset = table.getFont().getCharset();
         try {
-            Field f = CFFCharset.class.getDeclaredField("nameToSid");
+            Field f = CFFCharset.class.getDeclaredField("gidToSid");
             f.setAccessible(true);
-            Map<String, Integer> map = (Map<String, Integer>) f.get(charset);
+            @SuppressWarnings("unchecked") Map<Integer, Integer> map = (Map<Integer, Integer>) f.get(charset);
             int numberOfGlyphs = map.size();
-            OpenTypeCharacter characters[] = new OpenTypeCharacter[numberOfGlyphs];
             characterMap.setNumberOfGlyphs(numberOfGlyphs);
-            ArrayList<OpenTypeCharacter> characterList = new ArrayList<OpenTypeCharacter>();
-            for(String str : map.keySet()) {
-              OpenTypeCharacter character = new OpenTypeCharacter();
-              character.setCharacterIndex(map.get(str));
-              character.setName(str);
-              characterList.add(character);
+            ArrayList<OpenTypeSubtable> subtableList = new ArrayList<>();
+            if(cmapTable != null) {
+              for(CmapSubtable cmapSubtable : cmapTable.getCmaps()) {
+                OpenTypeSubtable subtable = new OpenTypeSubtable();
+                subtable.setSubtableIndex(cmapSubtable.getPlatformId());
+                ArrayList<Integer> characterList = new ArrayList<>();
+                for(Integer gid : map.values()) {
+                  if(cmapSubtable.getCharCodes(gid) != null && !cmapSubtable.getCharCodes(gid).isEmpty()) {
+                    characterList.addAll(cmapSubtable.getCharCodes(gid));
+                  }
+                }
+                subtable.setCharacterList(characterList);
+                subtableList.add(subtable);
+              }
             }
-            for(int i = 0; i < numberOfGlyphs; i++) {
-              characters[i] = characterList.get(i);
-            }
-            characterMap.setCharacters(characters);
+            characterMap.setSubtables(subtableList);
         } catch (NoSuchFieldException | IllegalAccessException | ClassCastException e) {
             throw new RuntimeException(e);
         }

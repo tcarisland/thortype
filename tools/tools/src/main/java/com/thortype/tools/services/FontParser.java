@@ -1,9 +1,7 @@
 package com.thortype.tools.services;
 
 import com.thortype.tools.model.Font;
-import com.thortype.tools.opentype.OpenTypeCharacterMap;
 import com.thortype.tools.opentype.OpenTypeCharacterMapExtractor;
-import com.thortype.tools.opentype.OpenTypeCharacter;
 import com.thortype.tools.opentype.OpenTypeMetaExtractor;
 import com.thortype.tools.types.FontStandard;
 import lombok.extern.slf4j.Slf4j;

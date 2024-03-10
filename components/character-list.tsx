@@ -58,7 +58,7 @@ export default class CharacterList extends React.Component<CharacterListProps, C
         return(
           <div className='grid grid-cols-9 justify-center m-auto ' style={ this.textAreaDynamicStyle() }>
             {                                  
-              this.props.font &&
+              this.props.font && this.props.font.characterMap && this.props.font.characterMap.subtables[0] && this.props.font.characterMap.subtables[0].characterList &&
               this.props.font.characterMap.subtables[0].characterList.map(
                 characterIndex => { return this.renderGlyph(characterIndex, this.i++) }
                 )

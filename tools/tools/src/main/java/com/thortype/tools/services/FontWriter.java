@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import com.thortype.tools.json.*;
-import jdk.jfr.MetadataDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +30,7 @@ public class FontWriter {
   @Autowired
   private CharacterMapDefinitionTypescriptRenderer characterMapDefinitionTypescriptRenderer;
   @Autowired
-  private CharacterDefinitionTypescriptRenderer characterDefinitionTypescriptRenderer;
+  private SubtableDefinitionTypescriptRenderer subtableDefinitionTypescriptRenderer;
 	@Autowired
 	private FontTypescriptRenderer fontRenderer;
   @Autowired
@@ -44,7 +43,7 @@ public class FontWriter {
 			pw.println(fontStandardTypescriptRenderer.render());
 			pw.println(fontDefinitionTypescriptRenderer.render());
       pw.println(characterMapDefinitionTypescriptRenderer.render());
-      pw.println(characterDefinitionTypescriptRenderer.render());
+      pw.println(subtableDefinitionTypescriptRenderer.render());
       pw.println(metaRenderer.render());
 			pw.close();
 		} catch (FileNotFoundException e) {
@@ -77,8 +76,10 @@ public class FontWriter {
 		printWriter.println("const fonts: Font[] = [");
 	}
 
+  int i = 0;
+
 	public void printFont(Font font) throws IOException {
-		log.info("printing font {}", font.getName());
+		log.info("{} : printing font {}", ++i , font.getName());
 		printWriter.printf("%s,%n", this.fontRenderer.render(font));
 	}
 

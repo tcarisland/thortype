@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.thortype.tools.model.Font;
 import com.thortype.tools.typescript.FontTsxField;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +33,7 @@ public abstract class TypescriptRenderer<T> {
 
 	public static PrettyPrinter initPrettyPrinter() {
 		DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
-		prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
+		//prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
 		return prettyPrinter;
 	}
 

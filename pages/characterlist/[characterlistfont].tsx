@@ -6,6 +6,7 @@ import FontService from '../../services/font-service';
 import { GetStaticPaths } from 'next'
 import { GetStaticProps } from 'next'
 import { Font } from '../../data/font'
+import CharacterList from "../../components/character-list";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -20,6 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 const FontCharacterListPage: NextPage = () => {
+
   const router = useRouter()
 
   const font = router.asPath.replace(/\/characterlist\/(.*?)\//g, "$1");
@@ -46,11 +48,9 @@ const FontCharacterListPage: NextPage = () => {
             }
       {
                 fontObj &&
-                <div className=''>
-                  <TextPreview  fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)}></TextPreview>
-                </div>
+                <CharacterList fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)} />
 
-            }
+        }
     </div>
     )
 }

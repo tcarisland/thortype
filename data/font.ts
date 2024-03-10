@@ -1,7 +1,4 @@
-export enum FontStandard {
-  OpenType,
-  TrueType
-}
+export enum FontStandard { OpenType, TrueType }
 export interface Font {
   meta: Meta,
   name: string,
@@ -10,10 +7,13 @@ export interface Font {
   encoding: string
 }
 export interface CharacterMap {
-  characters: Glyph[],
+  subtables: Subtable[],
   numberOfGlyphs: number
 }
-export interface Glyph { }
+export interface Subtable {
+  subtableIndex: number,
+  characterList: number[]
+}
 export interface Meta {
   designerUrl: string,
   licenseUrl: string,

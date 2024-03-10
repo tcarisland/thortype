@@ -4,17 +4,13 @@ import java.nio.file.Path;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.thortype.tools.opentype.OpenTypeCharacter;
 import com.thortype.tools.opentype.OpenTypeCharacterMap;
-import com.thortype.tools.opentype.OpenTypeMetaExtractor;
 import com.thortype.tools.opentype.OpenTypeMeta;
 import com.thortype.tools.types.FontStandard;
 import com.thortype.tools.typescript.FontTsxField;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.fontbox.ttf.OTFParser;
-import org.apache.fontbox.ttf.OpenTypeFont;
 
 @Data
 @Slf4j
