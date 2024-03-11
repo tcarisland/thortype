@@ -16,6 +16,11 @@ There are two main components of this project
 
 Whenever a font is changed or edited, run the tools application and make a commit, this might be automated in the future.
 
+### Styling
+
+This project uses [Tailwind CSS](https://tailwindcss.com/) as well as icons from [Material](https://www.npmjs.com/package/@mui/material).
+Some dynamic styling is used to set the Fonts for the pages and change styling properties in the text preview text field.
+
 ## Fonts
 
 Fonts are embedded into the HTML files as mentioned above.
