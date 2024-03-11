@@ -5,6 +5,8 @@ This is the static font portfolio website deployed to thortype.com (web2) and th
 
 It's made using Next.JS and deployed with the build and export commands.
 
+<img src="docs/img/thortype-screenshot.png" alt="ThorType Screenshot">
+
 ## Structure
 
 There are two main components of this project
