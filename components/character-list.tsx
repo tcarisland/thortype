@@ -1,4 +1,4 @@
-import React, {ReactElement, SyntheticEvent} from 'react';
+import React, {ReactElement, SyntheticEvent, useState} from 'react';
 import { Font } from '../data/font';
 
 export interface CharacterListProps {
@@ -9,26 +9,26 @@ export interface CharacterListProps {
 
 export interface CharacterListState {
   width: number,
-  height: number
+  height: number,
+  fontFamily: string,
+  fontSize: number,
+  gridTemplateColumns: string,
 }
 
 export default class CharacterList extends React.Component<CharacterListProps, CharacterListState> {
     i = 0;
     fontCssName = "tc-" + this.props.fontName.replace(/\/fonts\/(.*?)\//g, "$1");
-
-    textAreaDynamicStyle(): any {
-      return {
-        fontFamily: this.fontCssName,
-        fontSize: "32px",
-        lineHeight: "32px",
-      }
-    }
+    glyphSize = 100
+    padding= 20
 
     constructor(props: CharacterListProps) {
         super(props);
         this.state = {
-          width: 0,
-          height: 0
+          width: 1920,
+          height: 1080,
+          fontFamily: this.fontCssName,
+          fontSize: 48,
+          gridTemplateColumns: "repeat(" +this.calculateColumns(1920)+ ", 1fr)"
         };
     }
 
@@ -41,28 +41,63 @@ export default class CharacterList extends React.Component<CharacterListProps, C
           const w = window.innerWidth;
           const h = window.innerHeight;
           this.setState({
+              ...this.state,
+              gridTemplateColumns: "repeat(" + this.calculateColumns(w)+ ", 1fr)",
               width: w,
               height: h
           });
+          console.log("WIDTH")
+          console.log(this.state.width)
       })
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      this.setState({
+        ...this.state,
+        gridTemplateColumns: "repeat(" + this.calculateColumns(w)+ ", 1fr)",
+        fontFamily: this.fontCssName,
+        width: w,
+        height: h
+      });
+    }
+
+    calculateColumns(width: number) {
+      const cols = Math.floor(width / (this.glyphSize + (this.padding * 2))) - 2
+      return cols >= 3 ? cols : 3
     }
 
     renderGlyph(glyph: number, i: number): ReactElement<any, any> {
       let unicodeString = String.fromCharCode(glyph);
-      return <div style={{border: "1px solid black", padding: "1em", margin: "1em", textAlign: "center"}} key={"glyphPreviewBox" + i}>
+      return <div style={{
+        border: "1px solid black",
+        width: this.glyphSize + "px",
+        height: this.glyphSize + "px",
+        lineHeight: "80px",
+        textAlign: "center"}} key={"glyphPreviewBox" + i}>
         { unicodeString }
       </div>
     }
 
-    render(): React.ReactNode {
+  render(): React.ReactNode {
         return(
-          <div className='col-start-2 col-span-8 row-start-1 grid grid-cols-9 justify-center' style={ this.textAreaDynamicStyle() }>
-            {
-              this.props.font && this.props.font.characterMap && this.props.font.characterMap.subtables[0] && this.props.font.characterMap.subtables[0].characterList &&
-              this.props.font.characterMap.subtables[0].characterList.map(
-                characterIndex => { return this.renderGlyph(characterIndex, this.i++) }
+          <div className="overflow-y-auto">
+            <div className='grid justify-between gap-2'
+                 style={{
+                   width: this.state.width + "px",
+                   height: this.state.height + "px",
+                   fontFamily: this.state.fontFamily,
+                   fontSize: this.state.fontSize + "px",
+                   lineHeight: this.state.fontSize + "px",
+                   gridTemplateColumns: this.state.gridTemplateColumns
+                 }}>
+              {
+                this.props.font && this.props.font.characterMap && this.props.font.characterMap.subtables[0] && this.props.font.characterMap.subtables[0].characterList &&
+                this.props.font.characterMap.subtables[0].characterList.map(
+                  characterIndex => {
+                    return this.renderGlyph(characterIndex, this.i++)
+                  }
                 )
-            }
+              }
+            </div>
           </div>
 
         )

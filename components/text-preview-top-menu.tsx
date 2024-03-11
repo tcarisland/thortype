@@ -63,7 +63,7 @@ export default class TextPreviewTopMenu extends React.Component<TextPreviewTopMe
   render(): React.ReactNode {
     let i = 1;
 
-    return <div className="col-start-1 row-start-1"><div className="inline-flex flex-col space-y-2">
+    return <div className="sticky top-2 pb-4"><div className="inline-flex flex-row justify-center space-x-2">
       {
         this.buttonList.map((b) => {
           return(this.renderButton(b, ++i));

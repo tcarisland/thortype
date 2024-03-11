@@ -48,12 +48,12 @@ const FontCharacterListPage: NextPage = () => {
                 `}
                 </style>
       }
-      <div className="grid">
+      <div>
+        <TextPreviewTopMenu fontName={font} location={path}></TextPreviewTopMenu>
         {
           fontObj &&
           <CharacterList fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)} />
         }
-          <TextPreviewTopMenu fontName={font} location={path}></TextPreviewTopMenu>
       </div>
     </div>
     )

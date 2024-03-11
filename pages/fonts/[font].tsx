@@ -50,9 +50,9 @@ const FontPage: NextPage = () => {
             }
             {
                 fontObj &&
-                <div className='grid'>
-                  <TextPreview  fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)}></TextPreview>
+                <div>
                   <TextPreviewTopMenu fontName={font} location={path}></TextPreviewTopMenu>
+                  <TextPreview  fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)}></TextPreview>
                 </div>
 
             }
