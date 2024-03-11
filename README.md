@@ -11,8 +11,10 @@ It's made using Next.JS and deployed with the build and export commands.
 
 There are two main components of this project
 - The site proper:
+
   This is Next.JS code whereby pages are made with little or no backend calls, fonts are embedded into their respective pages by getting them from the font-list-data.ts and font.ts type definitions.
-- Tools
+- Tools:
+
   This is a spring boot Java-project that uses Apache PDFBox/FontBox to extract relevant information from fonts and write them to the font.ts and font-list-data JSON files.
   It also creates the base64-encoded data-uri.
 
