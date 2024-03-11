@@ -7,6 +7,7 @@ import { GetStaticPaths } from 'next'
 import { GetStaticProps } from 'next'
 import { Font } from '../../data/font'
 import CharacterList from "../../components/character-list";
+import TextPreviewTopMenu from '../../components/text-preview-top-menu';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -25,6 +26,7 @@ const FontCharacterListPage: NextPage = () => {
   const router = useRouter()
 
   const font = router.asPath.replace(/\/characterlist\/(.*?)\//g, "$1");
+  const path = router.asPath
 
   const fontObj: Font | undefined = FontService.findFont(font);
 
@@ -45,12 +47,14 @@ const FontCharacterListPage: NextPage = () => {
                     }
                 `}
                 </style>
-            }
-      {
-                fontObj &&
-                <CharacterList fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)} />
-
+      }
+      <div className="grid">
+        {
+          fontObj &&
+          <CharacterList fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)} />
         }
+          <TextPreviewTopMenu fontName={font} location={path}></TextPreviewTopMenu>
+      </div>
     </div>
     )
 }

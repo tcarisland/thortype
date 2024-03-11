@@ -7,7 +7,6 @@ import TextDecreaseIcon from '@mui/icons-material/TextDecrease';
 import TextIncreaseIcon from '@mui/icons-material/TextIncrease';
 import DownloadIcon from '@mui/icons-material/Download';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import EmojiSymbolsIcon from '@mui/icons-material/EmojiSymbols';
 import React, { ReactNode } from "react";
 import { Font } from "../data/font";
 
@@ -29,7 +28,6 @@ export enum TextPreviewToolbarAction {
     INCREASE_FONT_SIZE,
     DECREASE_FONT_SIZE,
     CAPTION,
-    LIST_CHARACTERS
 }
 
 interface TextPreviewToolbarButton {
@@ -75,11 +73,6 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
             action: TextPreviewToolbarAction.CAPTION,
             icon: <AddPhotoAlternateIcon></AddPhotoAlternateIcon>,
             title: "Caption Image"
-        },
-        {
-          action: TextPreviewToolbarAction.LIST_CHARACTERS,
-          icon: <EmojiSymbolsIcon></EmojiSymbolsIcon>,
-          title: "Show Characters"
         }
     ]
 
@@ -90,7 +83,7 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
             buttonListRows: "repeat(1, 1fr)"
         }
     }
-    
+
     componentDidMount(): void {
         this.updateButtonListGrid();
         window.addEventListener('resize', () => {
@@ -108,7 +101,7 @@ export default class TextPreviewToolbar extends React.Component<TextPreviewToolb
             buttonListRows: "repeat(" + rows + ", 1fr)"
         })
     }
-    
+
 
     renderButton(b: TextPreviewToolbarButton, i: number) {
         return(

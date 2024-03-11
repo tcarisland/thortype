@@ -7,6 +7,7 @@ import { GetStaticProps } from 'next'
 import { Font } from '../../data/font'
 import Head from 'next/head'
 import TextPreview from '../../components/text-preview'
+import TextPreviewTopMenu from '../../components/text-preview-top-menu'
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
@@ -25,6 +26,7 @@ const FontPage: NextPage = () => {
     const router = useRouter()
 
     const font = router.asPath.replace(/\/fonts\/(.*?)\//g, "$1");
+    const path = router.asPath
 
     const fontObj: Font | undefined = FontService.findFont(font);
 
@@ -48,10 +50,11 @@ const FontPage: NextPage = () => {
             }
             {
                 fontObj &&
-                <div className=''>
-                    <TextPreview  fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)}></TextPreview>
+                <div className='grid'>
+                  <TextPreview  fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)}></TextPreview>
+                  <TextPreviewTopMenu fontName={font} location={path}></TextPreviewTopMenu>
                 </div>
-                    
+
             }
         </div>
     )

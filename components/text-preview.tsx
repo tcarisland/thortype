@@ -85,7 +85,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             ...this.state,
             open: true,
             base64Snapshot: snapshot
-        }); 
+        });
     }
 
     increaseFontSize(increaseAmount: number) {
@@ -119,7 +119,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
         }
         domtoimage.toPng(fontTextarea, opt)
             .then(function (dataUrl: string) {
-                comp.updateSnapshot(dataUrl);    
+                comp.updateSnapshot(dataUrl);
             })
             .catch(function (error: any) {
                 console.error('oops, something went wrong!', error);
@@ -161,9 +161,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                 if(myCanvas && myImage && e.target?.result) {
                     myImage.src = e.target?.result.toString();
                     myImage.onload = () => {
-                        var myContext = (myCanvas as HTMLCanvasElement).getContext("2d"); 
+                        var myContext = (myCanvas as HTMLCanvasElement).getContext("2d");
                         console.log({
-                            "ow": myImage.width, "oh": myImage.height, 
+                            "ow": myImage.width, "oh": myImage.height,
                             "sw": this.state.area.width, "sh": this.state.area.height
                         })
                         let widthRatio = (this.state.area.width * 1.0) / (myImage.width * 1.0);
@@ -180,9 +180,9 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
                     }
                 } else {
                     console.log("could not find canvas");
-                }                
+                }
             };
-    
+
             fileReader.onerror = (error) => {
                 console.log({"error": error});
                 reject(error);
@@ -220,9 +220,6 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             case TextPreviewToolbarAction.CAPTION:
                 this.uploadImage();
                 break;
-            case TextPreviewToolbarAction.LIST_CHARACTERS:
-                this.listCharacters();
-                break;
         }
     }
 
@@ -241,53 +238,62 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
 
     render(): React.ReactNode {
         return(
+          <div className="col-start-1 row-start-1">
             <div className='grid grid-cols-3 justify-center m-auto fontPreviewTemplateColumns '>
-                <Tooltip className='col-start-2 grid-span-1 justify-center m-auto ' title="Try the font with your own text" placement='left'>
-                    <div id="fontAreaContainerDiv" className="grid justify-center grid-cols-1 grid-rows-1 mb-2" style={{width : this.state.area.width, height: this.state.area.height}}>
-                        <canvas id="fontDemoTextCanvas" 
-                        className={this.textAreaStyle}
-                        width={this.state.area.width}
-                        height={this.state.area.height}>
-                        </canvas>
-                        <div id="fontDemoTextArea"
-                        contentEditable="true"
-                        className={ this.textAreaStyle + " " + this.state.textAreaAlignment }
-                        style={ this.textAreaDynamicStyle() }>
-                        </div>
-                    </div>
-                </Tooltip>
-                <div className='row-start-2 col-start-2 grid-span-1 m-auto '>
-                    <div className='' style={{width: this.state.area.width}}>
-                        <TextPreviewToolbar fontFilePath={( this.props.fontFilePath )} onToolButtonClicked={(e: TextPreviewToolbarAction) => { this.onToolButtonClicked(e) }}></TextPreviewToolbar>
-                    </div>
+              <Tooltip className='col-start-2 grid-span-1 justify-center m-auto '
+                       title="Try the font with your own text" placement='left'>
+                <div id="fontAreaContainerDiv" className="grid justify-center grid-cols-1 grid-rows-1 mb-2"
+                     style={{width: this.state.area.width, height: this.state.area.height}}>
+                  <canvas id="fontDemoTextCanvas"
+                          className={this.textAreaStyle}
+                          width={this.state.area.width}
+                          height={this.state.area.height}>
+                  </canvas>
+                  <div id="fontDemoTextArea"
+                       contentEditable="true"
+                       className={this.textAreaStyle + " " + this.state.textAreaAlignment}
+                       style={this.textAreaDynamicStyle()}>
+                  </div>
                 </div>
-            <div>
+              </Tooltip>
+              <div className='row-start-2 col-start-2 grid-span-1 m-auto '>
+                <div className='' style={{width: this.state.area.width}}>
+                  <TextPreviewToolbar fontFilePath={(this.props.fontFilePath)}
+                                      onToolButtonClicked={(e: TextPreviewToolbarAction) => {
+                                        this.onToolButtonClicked(e)
+                                      }}></TextPreviewToolbar>
+                </div>
+              </div>
+              <div>
                 <input
-                    ref={this.setFileInputRef}
-                    onChange={this.handleFileUpload}
-                    accept="image/*"
-                    type="file"
-                    style={{ display: "none" }}
-                    multiple={false}
+                  ref={this.setFileInputRef}
+                  onChange={this.handleFileUpload}
+                  accept="image/*"
+                  type="file"
+                  style={{display: "none"}}
+                  multiple={false}
                 />
-           </div>
-                <Modal open={this.state.open}
-                    onClose={() => { this.handleClose() }}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description">
-                    <Box sx={this.boxStyle}>
-                        <img id="snapshotImage" src={this.state.base64Snapshot}></img>
-                        <Tooltip title="Download" placement='top'>
-                            <button className={ this.buttonStyle}>
-                                <a download={ this.props.fontName + "-snapshot.png"} href={ this.state.base64Snapshot }>
-                                    <DownloadIcon>
-                                    </DownloadIcon>
-                                </a>
-                            </button>
-                        </Tooltip>
-                    </Box>
-                </Modal>
+              </div>
+              <Modal open={this.state.open}
+                     onClose={() => {
+                       this.handleClose()
+                     }}
+                     aria-labelledby="modal-modal-title"
+                     aria-describedby="modal-modal-description">
+                <Box sx={this.boxStyle}>
+                  <img id="snapshotImage" src={this.state.base64Snapshot}></img>
+                  <Tooltip title="Download" placement='top'>
+                    <button className={this.buttonStyle}>
+                      <a download={this.props.fontName + "-snapshot.png"} href={this.state.base64Snapshot}>
+                        <DownloadIcon>
+                        </DownloadIcon>
+                      </a>
+                    </button>
+                  </Tooltip>
+                </Box>
+              </Modal>
             </div>
+          </div>
 
         )
     }

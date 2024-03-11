@@ -15,7 +15,7 @@ export interface CharacterListState {
 export default class CharacterList extends React.Component<CharacterListProps, CharacterListState> {
     i = 0;
     fontCssName = "tc-" + this.props.fontName.replace(/\/fonts\/(.*?)\//g, "$1");
-    
+
     textAreaDynamicStyle(): any {
       return {
         fontFamily: this.fontCssName,
@@ -23,7 +23,7 @@ export default class CharacterList extends React.Component<CharacterListProps, C
         lineHeight: "32px",
       }
     }
-  
+
     constructor(props: CharacterListProps) {
         super(props);
         this.state = {
@@ -53,11 +53,11 @@ export default class CharacterList extends React.Component<CharacterListProps, C
         { unicodeString }
       </div>
     }
-  
+
     render(): React.ReactNode {
         return(
-          <div className='grid grid-cols-9 justify-center m-auto ' style={ this.textAreaDynamicStyle() }>
-            {                                  
+          <div className='col-start-2 col-span-8 row-start-1 grid grid-cols-9 justify-center' style={ this.textAreaDynamicStyle() }>
+            {
               this.props.font && this.props.font.characterMap && this.props.font.characterMap.subtables[0] && this.props.font.characterMap.subtables[0].characterList &&
               this.props.font.characterMap.subtables[0].characterList.map(
                 characterIndex => { return this.renderGlyph(characterIndex, this.i++) }
