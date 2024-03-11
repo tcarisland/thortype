@@ -101,7 +101,7 @@ export default class CharacterList extends React.Component<CharacterListProps, C
                 </p>
                 <p>
                   { this.props.fontName.charAt(0).toUpperCase() +  this.props.fontName.slice(1) + " " }
-                   hasn't been formatted for preview yet.
+                   hasn&apos;t been formatted for preview yet.
                 </p>
                 <p>
                   Come back later.
