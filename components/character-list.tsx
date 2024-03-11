@@ -77,9 +77,37 @@ export default class CharacterList extends React.Component<CharacterListProps, C
       </div>
     }
 
+  isCharacterListNotEmpty() {
+      return this.props.font &&
+        this.props.font.characterMap &&
+        this.props.font.characterMap.subtables[0] &&
+        this.props.font.characterMap.subtables[0].characterList &&
+        this.props.font.characterMap.subtables[0].characterList.length
+  }
+
   render(): React.ReactNode {
         return(
           <div className="overflow-y-auto">
+            {
+              !this.isCharacterListNotEmpty() &&
+              <div style={{
+                margin: "auto",
+                width: "50%",
+                padding: "10px",
+                textAlign: "center"
+              }}>
+                <p>
+                  Oops... nothing to see here!
+                </p>
+                <p>
+                  { this.props.fontName.charAt(0).toUpperCase() +  this.props.fontName.slice(1) + " " }
+                   hasn't been formatted for preview yet.
+                </p>
+                <p>
+                  Come back later.
+                </p>
+              </div>
+            }
             <div className='grid justify-between gap-2'
                  style={{
                    width: this.state.width + "px",
@@ -90,7 +118,7 @@ export default class CharacterList extends React.Component<CharacterListProps, C
                    gridTemplateColumns: this.state.gridTemplateColumns
                  }}>
               {
-                this.props.font && this.props.font.characterMap && this.props.font.characterMap.subtables[0] && this.props.font.characterMap.subtables[0].characterList &&
+                this.isCharacterListNotEmpty() &&
                 this.props.font.characterMap.subtables[0].characterList.map(
                   characterIndex => {
                     return this.renderGlyph(characterIndex, this.i++)
