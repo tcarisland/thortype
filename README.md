@@ -21,7 +21,7 @@ Whenever a font is changed or edited, run the tools application and make a commi
 Fonts are embedded into the HTML files as mentioned above.
 Fonts should be stored as OpenType fonts with a CFFTable so the tools can easily extract information about available glyphs and characters.
 
-# Next.JS information
+## Next.JS information
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
