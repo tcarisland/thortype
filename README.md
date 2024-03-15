@@ -1,7 +1,7 @@
 
 # ThorType
 
-This is the static font portfolio website deployed to thortype.com (web2) and thortype.x (web3).
+This is the static font portfolio website deployed to [thortype.com](https://www.thortype.com) (web2) and thortype.x (web3).
 
 It's made using Next.JS and deployed with the build and export commands.
 
