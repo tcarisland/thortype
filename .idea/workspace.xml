@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="084ea444-911c-4e79-b5a3-d39dd99dd32a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/character-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/character-list.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/demodulator.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/fonts/tuscan-black.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/fonts/tuscan-black.otf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +92,8 @@
       <option name="presentableId" value="Default" />
       <updated>1669869560291</updated>
       <workItem from="1709592329196" duration="187000" />
-      <workItem from="1710151448165" duration="17274000" />
+      <workItem from="1710151448165" duration="19245000" />
+      <workItem from="1710709222708" duration="1059000" />
     </task>
     <servers />
   </component>
