@@ -5,7 +5,7 @@ export enum FontStandard {
 
 export interface Glyph {
   glyphId: string,
-  unicode: string
+  unicode: number
 }
 
 export interface CharacterMap {

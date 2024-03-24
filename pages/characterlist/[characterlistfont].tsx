@@ -43,7 +43,7 @@ const FontCharacterListPage: NextPage = () => {
                     @font-face {
                         font-display: block;
                         font-family: "tc-${fontObj.name}";
-                        src: url("${fontObj.encoding}");
+                        src: url("${fontObj.dataUri}");
                     }
                 `}
                 </style>

@@ -87,11 +87,7 @@ export default class CharacterList extends React.Component<CharacterListProps, C
     }
 
   isCharacterListNotEmpty() {
-    return this.props.font &&
-      this.props.font.characterMap &&
-      this.props.font.characterMap.subtables[0] &&
-        this.props.font.characterMap.subtables[0].characterList &&
-        this.props.font.characterMap.subtables[0].characterList.length
+    return this.props.font.characterMap.numberOfGlyphs > 0
   }
 
   render(): React.ReactNode {
@@ -120,9 +116,9 @@ export default class CharacterList extends React.Component<CharacterListProps, C
             <div className='grid justify-between gap-2' style={{gridTemplateColumns: this.state.gridTemplateColumns}}>
               {
                 this.isCharacterListNotEmpty() &&
-                this.props.font.characterMap.subtables[0].characterList.map(
-                  (characterIndex, index) => {
-                    return this.renderGlyph(characterIndex, index)
+                this.props.font.characterMap.glyphs.map(
+                  (glyph, index) => {
+                    return this.renderGlyph(glyph.unicode, index)
                   }
                 )
               }
