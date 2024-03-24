@@ -44,8 +44,6 @@ export default class TextPreviewTopMenu extends React.Component<TextPreviewTopMe
   }
 
   getRelativePathName(button: TopMenuButton): string {
-    console.log("Location")
-    console.log(this.props.location)
     return "/" + button.path + "/" + this.props.fontName
   }
 

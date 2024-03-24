@@ -69,7 +69,7 @@ export default class TextPreview extends React.Component<TextPreviewProps, TextP
             area: toCanvasSize({width: w, height: h})
         });
         const sampleTextArea = document.getElementById("fontDemoTextArea");
-        sampleTextArea && (sampleTextArea.innerHTML = this.props.font.meta.sampleText);
+        sampleTextArea && (sampleTextArea.innerHTML = !(this.props.font.meta.sampleText) ? this.props.font.name : this.props.font.meta.sampleText);
         window.addEventListener('resize', () => {
             const w = window.innerWidth;
             const h = window.innerHeight;
