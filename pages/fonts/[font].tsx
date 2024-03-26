@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import FontService from '../../services/font-service'
 import { GetStaticPaths } from 'next'
 import { GetStaticProps } from 'next'
@@ -8,6 +7,8 @@ import { Font } from '../../data/font'
 import Head from 'next/head'
 import TextPreview from '../../components/text-preview'
 import TextPreviewTopMenu from '../../components/text-preview-top-menu'
+import BottomNavbar from "../../components/bottom-navbar";
+import NavLink from "../../model/nav-link";
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
@@ -21,6 +22,17 @@ export const getStaticProps: GetStaticProps = async () => {
         props: {}, // will be passed to the page component as props
     }
 }
+
+const pages: NavLink[] = [
+  {
+    name: "Try It",
+    link: "/tryit"
+  },
+  {
+    name: "Character List",
+    link: "/characters"
+  }
+]
 
 const FontPage: NextPage = () => {
     const router = useRouter()
@@ -51,11 +63,11 @@ const FontPage: NextPage = () => {
             {
                 fontObj &&
                 <div>
-                  <TextPreviewTopMenu fontName={font} location={path}></TextPreviewTopMenu>
                   <TextPreview  fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)}></TextPreview>
                 </div>
 
             }
+            <BottomNavbar pages={[{name: "Character List", link: "/characterlist/" + font}]}></BottomNavbar>
         </div>
     )
 }

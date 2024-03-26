@@ -8,6 +8,8 @@ import { GetStaticProps } from 'next'
 import { Font } from '../../data/font'
 import CharacterList from "../../components/character-list";
 import TextPreviewTopMenu from '../../components/text-preview-top-menu';
+import BottomNavbar from "../../components/bottom-navbar";
+import NavLink from "../../model/nav-link";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -21,6 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {}, // will be passed to the page component as props
   }
 }
+
 const FontCharacterListPage: NextPage = () => {
 
   const router = useRouter()
@@ -49,12 +52,12 @@ const FontCharacterListPage: NextPage = () => {
                 </style>
       }
       <div>
-        <TextPreviewTopMenu fontName={font} location={path}></TextPreviewTopMenu>
         {
           fontObj &&
           <CharacterList fontName={fontObj.name} font={fontObj} fontFilePath={"/static/fonts/" + FontService.getFontFilePath(fontObj)} />
         }
       </div>
+      <BottomNavbar pages={[{name: "Preview", link: "/fonts/" + font}]}></BottomNavbar>
     </div>
     )
 }
